@@ -1,0 +1,37 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.category-filter {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+
+  // oculta la scrollbar visualmente sin perder funcionalidad de scroll
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.category-filter-chip {
+  @include focus-ring;
+  @include respect-motion-preference;
+
+  flex-shrink: 0;
+  padding: 8px 18px;
+  border-radius: $radius-button;
+  border: none;
+  background-color: $input-bg;
+  color: $text-main;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &.category-filter-active {
+    background-color: $primary-color;
+    color: $color-blanco;
+  }
+
+  &:hover:not(.category-filter-active) {
+    background-color: $border-color;
+  }
+}
