@@ -1,0 +1,27 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.auth-container {
+  @include flex-center-container;
+}
+
+.auth-card {
+  @include auth-card;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+
+  h1 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: $font-size-sm;
+    color: $text-muted;
+  }
+}

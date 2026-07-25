@@ -1,0 +1,19 @@
+@use '../../../../styles/variables' as *;
+
+.auth-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $text-muted;
+
+  .auth-link {
+    color: $primary-color;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    margin-left: 6px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
