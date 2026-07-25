@@ -1,0 +1,44 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 420px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $color-ink;
+  border-radius: $radius-card;
+  padding: 10px 8px calc(10px + env(safe-area-inset-bottom));
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.35);
+  z-index: 100;
+}
+
+.bottom-nav-item {
+  @include focus-ring;
+  @include respect-motion-preference;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: rgba($color-blanco, 0.6);
+  text-decoration: none;
+  font-size: $font-size-xs;
+  padding: 6px 12px;
+  border-radius: $radius-input;
+  transition: color $transition-fast;
+
+  &.bottom-nav-active {
+    color: $color-blanco;
+  }
+
+  &:hover {
+    color: $color-blanco;
+  }
+}
