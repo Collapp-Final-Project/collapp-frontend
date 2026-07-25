@@ -1,0 +1,62 @@
+// ==========================================
+// COLLAPP - SISTEMA DE DISEÑO
+// ==========================================
+
+// --- Paleta Oficial Figma ---
+$color-lavanda: #D2B1F9;
+$color-verde-lima: #D6F26D;
+$color-azul-real: #3B5ECD;
+$color-naranja-coral: #E95A33;
+$color-antracita: #222222;
+$color-blanco: #FFFFFF;
+
+// --- Colores Funcionales & Marca ---
+$primary-color: #703BE3;         
+$primary-hover: #5B2ECC;
+$bg-gradient-start: $color-lavanda;
+$bg-gradient-end: $color-verde-lima;
+
+// --- Colores por Especialidad---
+$specialty-sfx: $color-lavanda;       // SFX & Maquillaje
+$specialty-photo: $color-verde-lima;   // Fotografía & Video
+$specialty-model: $color-naranja-coral; // Modelo / Talento
+$specialty-prod: $color-azul-real;     // Producción
+
+// --- UI Base ---
+$text-main: $color-antracita;
+$text-muted: #666666;
+$text-placeholder: #767676;
+$card-bg: $color-blanco;
+$input-bg: #F8F9FA;
+$border-color: #E2E8F0;
+$error-color: #D32F2F;
+
+// --- Tipografía ---
+$font-base: 'Inter', system-ui, -apple-system, sans-serif;
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-md: 1rem;       // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 2rem;      // 32px
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// --- Bordes y Sombras ---
+$radius-card: 24px;              //tarjetas
+$radius-input: 12px;             //campos
+$radius-button: 9999px;          //Botón
+
+$shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+
+// --- Transiciones ---
+$transition-fast: 0.15s ease;
+$transition-normal: 0.25s ease;
+
+// --- Accesibilidad ---
+$focus-ring-color: $primary-color;
+$focus-ring-width: 3px;
