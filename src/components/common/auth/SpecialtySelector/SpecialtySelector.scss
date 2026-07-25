@@ -1,0 +1,60 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.specialty-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.specialty-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-main;
+}
+
+.specialty-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.specialty-option {
+  @include focus-ring;
+  @include respect-motion-preference;
+
+  padding: 14px 12px;
+  border-radius: $radius-input;
+  border: 2px solid $border-color;
+  background-color: $card-bg;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-main;
+  text-align: center;
+  transition: border-color $transition-fast, background-color $transition-fast;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+
+
+  &.specialty-sfx.specialty-selected {
+    border-color: $specialty-sfx;
+    background-color: rgba($specialty-sfx, 0.15);
+  }
+
+  &.specialty-photo.specialty-selected {
+    border-color: $specialty-photo;
+    background-color: rgba($specialty-photo, 0.15);
+  }
+
+  &.specialty-model.specialty-selected {
+    border-color: $specialty-model;
+    background-color: rgba($specialty-model, 0.15);
+  }
+
+  &.specialty-prod.specialty-selected {
+    border-color: $specialty-prod;
+    background-color: rgba($specialty-prod, 0.15);
+  }
+}
