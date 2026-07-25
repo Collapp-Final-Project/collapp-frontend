@@ -1,0 +1,67 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.feed-page {
+  padding: 24px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.feed-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+  }
+}
+
+.feed-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: $input-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-input;
+  padding: 0 14px;
+  height: 44px;
+  color: $text-placeholder;
+
+  &:focus-within {
+    border-color: $primary-color;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: $text-main;
+    font-size: $font-size-sm;
+
+    &::placeholder {
+      color: $text-placeholder;
+    }
+  }
+}
+
+.feed-status {
+  text-align: center;
+  color: $text-muted;
+  padding: 32px 0;
+}
+
+.feed-error {
+  color: $error-color;
+}
+
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
