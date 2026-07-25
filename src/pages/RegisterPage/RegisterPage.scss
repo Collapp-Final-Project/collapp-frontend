@@ -1,0 +1,40 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-step-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.register-back-button {
+  @include focus-ring;
+  @include respect-motion-preference;
+
+  background: none;
+  color: $text-muted;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  padding: 10px;
+  text-align: center;
+  border-radius: $radius-input;
+  transition: background-color $transition-fast, color $transition-fast;
+  order: 2;
+
+  &:hover {
+    background-color: $input-bg;
+    color: $text-main;
+  }
+}
+
+.register-step-actions .auth-submit-button {
+  margin-top: 0;
+  order: 1;
+}
