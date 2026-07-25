@@ -1,0 +1,68 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+  }
+}
+
+.auth-input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: $input-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-input;
+  padding: 0 12px;
+  height: 48px;
+  transition: border-color $transition-fast;
+
+  &:focus-within {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.15);
+  }
+
+  &.auth-input-error {
+    border-color: $error-color;
+    background-color: rgba($error-color, 0.05);
+
+    .auth-input-icon {
+      color: $error-color;
+    }
+  }
+
+  .auth-input-icon {
+    color: $text-placeholder;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: $text-main;
+    font-size: $font-size-md;
+    min-width: 0;
+
+    &::placeholder {
+      color: $text-placeholder;
+    }
+  }
+}
+
+.auth-error-message {
+  color: $error-color;
+  font-size: $font-size-xs;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
