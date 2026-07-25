@@ -1,60 +1,91 @@
-@use '../../../../styles/variables' as *;
-@use '../../../../styles/mixins' as *;
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
 
 .specialty-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
+  margin-top: 8px;
 
-.specialty-label {
-  font-size: $font-size-sm;
-  font-weight: $font-weight-semibold;
-  color: $text-main;
-}
-
-.specialty-options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.specialty-option {
-  @include focus-ring;
-  @include respect-motion-preference;
-
-  padding: 14px 12px;
-  border-radius: $radius-input;
-  border: 2px solid $border-color;
-  background-color: $card-bg;
-  font-size: $font-size-sm;
-  font-weight: $font-weight-medium;
-  color: $text-main;
-  text-align: center;
-  transition: border-color $transition-fast, background-color $transition-fast;
-
-  &:hover {
-    border-color: $primary-color;
+  .specialty-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
   }
 
-
-  &.specialty-sfx.specialty-selected {
-    border-color: $specialty-sfx;
-    background-color: rgba($specialty-sfx, 0.15);
+  .specialty-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
-  &.specialty-photo.specialty-selected {
-    border-color: $specialty-photo;
-    background-color: rgba($specialty-photo, 0.15);
+  .specialty-option {
+    @include respect-motion-preference;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 14px 12px;
+    border-radius: $radius-input;
+    border: 2px solid $border-color;
+    background-color: $card-bg;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-main;
+    text-align: center;
+    transition:
+      border-color $transition-fast,
+      background-color $transition-fast;
+
+    &:hover:not(.specialty-selected) {
+      border-color: $color-ink;
+    }
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $color-ink;
+      outline-offset: 2px;
+    }
+
+    &.specialty-sfx.specialty-selected {
+      border-color: $specialty-sfx;
+      background-color: rgba($specialty-sfx, 0.15);
+    }
+
+    &.specialty-photo.specialty-selected {
+      border-color: $specialty-photo;
+      background-color: rgba($specialty-photo, 0.15);
+    }
+
+    &.specialty-model.specialty-selected {
+      border-color: $specialty-model;
+      background-color: rgba($specialty-model, 0.15);
+    }
+
+    &.specialty-prod.specialty-selected {
+      border-color: $specialty-prod;
+      background-color: rgba($specialty-prod, 0.15);
+    }
   }
 
-  &.specialty-model.specialty-selected {
-    border-color: $specialty-model;
-    background-color: rgba($specialty-model, 0.15);
-  }
+  .specialty-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
 
-  &.specialty-prod.specialty-selected {
-    border-color: $specialty-prod;
-    background-color: rgba($specialty-prod, 0.15);
+    &.specialty-sfx {
+      background-color: $specialty-sfx;
+    }
+    &.specialty-photo {
+      background-color: $specialty-photo;
+    }
+    &.specialty-model {
+      background-color: $specialty-model;
+    }
+    &.specialty-prod {
+      background-color: $specialty-prod;
+    }
   }
 }

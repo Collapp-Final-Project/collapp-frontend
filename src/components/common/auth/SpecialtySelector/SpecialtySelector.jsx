@@ -22,7 +22,6 @@ export const SpecialtySelector = ({ id, label, value, onChange, error }) => {
     const nextOption = SPECIALTIES[nextIndex];
     onChange(nextOption.value);
 
-
     document.getElementById(`${id}-${nextOption.value}`)?.focus();
   };
 
@@ -53,6 +52,7 @@ export const SpecialtySelector = ({ id, label, value, onChange, error }) => {
               onClick={() => onChange(specialty.value)}
               onKeyDown={(e) => handleKeyDown(e, index)}
             >
+              <span className={`specialty-dot ${specialty.className}`} aria-hidden="true" />
               {specialty.label}
             </button>
           );

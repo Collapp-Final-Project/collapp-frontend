@@ -1,6 +1,7 @@
 @use '../../../styles/variables' as *;
 
 .auth-submit-button {
+  width: 100%;
   background-color: $primary-color;
   color: $color-blanco;
   height: 48px;
