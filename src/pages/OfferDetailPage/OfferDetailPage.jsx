@@ -1,31 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, MapPin, Calendar } from 'lucide-react';
-import { offerService } from '../../services/offerService';
-import { useAuth } from '../../hooks/useAuth';
-import { CategoryBadge } from '../../components/common/offers/CategoryBadge/CategoryBadge';
-import { StatusBadge } from '../../components/common/offers/StatusBadge/StatusBadge';
-import { AvatarPreview } from '../../components/ui/AvatarPreview/AvatarPreview';
-import './OfferDetailPage.scss';
-
-const COMPENSATION_LABEL = {
-  PAID: 'Remunerado',
-  COLLABORATION: 'Colaboración',
-};
-
-const STATUS_OPTIONS = [
-  { value: 'OPEN', label: 'Abierta' },
-  { value: 'PAUSED', label: 'Pausada' },
-  { value: 'COVERED', label: 'Cerrada' },
-];
-
-const formatDateRange = (startDate, endDate) => {
-  const options = { day: 'numeric', month: 'short', year: 'numeric' };
-  const start = new Date(startDate).toLocaleDateString('es-ES', options);
-  if (startDate === endDate) return start;
-  const end = new Date(endDate).toLocaleDateString('es-ES', options);
-  return `${start} – ${end}`;
-};
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { ArrowLeft, MapPin, Calendar } from "lucide-react";
+import { offerService } from "../../services/offerService";
+import { useAuth } from "../../hooks/useAuth";
+import { CategoryBadge } from "../../components/common/offers/CategoryBadge/CategoryBadge";
+import { StatusBadge } from "../../components/common/offers/StatusBadge/StatusBadge";
+import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
+import { formatDateRange } from "../../utils/formatDate";
+import { COMPENSATION_LABEL, STATUS_OPTIONS } from "../../utils/constants";
+import "./OfferDetailPage.scss";
 
 export const OfferDetailPage = () => {
   const { id } = useParams();
@@ -49,8 +32,8 @@ export const OfferDetailPage = () => {
         if (!isCancelled) {
           setError(
             err.response?.status === 404
-              ? 'Esta oferta ya no existe.'
-              : 'No se pudo cargar la oferta.'
+              ? "Esta oferta ya no existe."
+              : "No se pudo cargar la oferta."
           );
         }
       } finally {
@@ -69,22 +52,22 @@ export const OfferDetailPage = () => {
     try {
       const updated = await offerService.updateStatus(offer.id, newStatus);
       setOffer(updated);
-    } catch (err) {
-      setError('No se pudo actualizar el estado.');
+    } catch {
+      setError("No se pudo actualizar el estado.");
     }
   };
 
   const handleDelete = async () => {
     const confirmed = window.confirm(
-      '¿Seguro que quieres eliminar esta oferta? Esta acción no se puede deshacer.'
+      "¿Seguro que quieres eliminar esta oferta? Esta acción no se puede deshacer."
     );
     if (!confirmed) return;
 
     try {
       await offerService.remove(offer.id);
-      navigate('/feed');
-    } catch (err) {
-      setError('No se pudo eliminar la oferta.');
+      navigate("/feed");
+    } catch {
+      setError("No se pudo eliminar la oferta.");
     }
   };
 
@@ -99,7 +82,7 @@ export const OfferDetailPage = () => {
   if (error || !offer) {
     return (
       <p role="alert" className="offer-detail-status offer-detail-error">
-        {error || 'Oferta no encontrada.'}
+        {error || "Oferta no encontrada."}
       </p>
     );
   }
@@ -108,7 +91,7 @@ export const OfferDetailPage = () => {
 
   return (
     <div className="offer-detail-page">
-      <button className="offer-detail-back" onClick={() => navigate('/feed')}>
+      <button className="offer-detail-back" onClick={() => navigate("/feed")}>
         <ArrowLeft size={18} aria-hidden="true" /> Volver al tablón
       </button>
 

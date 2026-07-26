@@ -1,11 +1,5 @@
-import './CategoryBadge.scss';
-
-const CATEGORY_CONFIG = {
-  MAKEUP: { label: 'Makeup', className: 'specialty-sfx' },
-  PHOTOGRAPHY_VIDEO: { label: 'Foto / Vídeo', className: 'specialty-photo' },
-  MODEL_TALENT: { label: 'Modelo / Talento', className: 'specialty-model' },
-  PRODUCTION: { label: 'Producción', className: 'specialty-prod' },
-};
+import { CATEGORY_CONFIG } from "../../../../utils/constants";
+import "./CategoryBadge.scss";
 
 export const CategoryBadge = ({ category }) => {
   const config = CATEGORY_CONFIG[category];

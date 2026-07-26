@@ -1,5 +1,5 @@
-import { useAuth } from '../../hooks/useAuth';
-import './ProfilePage.scss';
+import { useAuth } from "../../hooks/useAuth";
+import "./ProfilePage.scss";
 
 export const ProfilePage = () => {
   const { user, logout } = useAuth();

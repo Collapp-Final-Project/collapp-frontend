@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import { BottomNav } from '../BottomNav/BottomNav';
-import './MainLayout.scss';
+import { Outlet } from "react-router-dom";
+import { BottomNav } from "../BottomNav/BottomNav";
+import "./MainLayout.scss";
 
 export const MainLayout = () => (
   <div className="main-layout">

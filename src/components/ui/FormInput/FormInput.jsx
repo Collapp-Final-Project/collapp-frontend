@@ -1,9 +1,9 @@
-import './FormInput.scss';
+import "./FormInput.scss";
 
 
 export const FormInput = ({
   id,
-  type = 'text',
+  type = "text",
   label,
   icon: Icon,
   error,
@@ -12,7 +12,7 @@ export const FormInput = ({
 }) => (
   <div className="auth-input-group">
     <label htmlFor={id}>{label}</label>
-    <div className={`auth-input-wrapper ${error ? 'auth-input-error' : ''}`}>
+    <div className={`auth-input-wrapper ${error ? "auth-input-error" : ""}`}>
       {Icon && <Icon className="auth-input-icon" size={20} aria-hidden="true" />}
       <input
         id={id}

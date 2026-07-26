@@ -1,15 +1,15 @@
-import { Banknote, Handshake } from 'lucide-react';
-import './CompensationSelector.scss';
+import { Banknote, Handshake } from "lucide-react";
+import "./CompensationSelector.scss";
 
 const OPTIONS = [
-  { value: 'PAID', label: 'Remunerado', icon: Banknote },
-  { value: 'COLLABORATION', label: 'Colaboración', icon: Handshake },
+  { value: "PAID", label: "Remunerado", icon: Banknote },
+  { value: "COLLABORATION", label: "Colaboración", icon: Handshake },
 ];
 
 export const CompensationSelector = ({ id, label, value, onChange, error }) => {
   const handleKeyDown = (e, index) => {
-    const isNext = e.key === 'ArrowRight' || e.key === 'ArrowDown';
-    const isPrev = e.key === 'ArrowLeft' || e.key === 'ArrowUp';
+    const isNext = e.key === "ArrowRight" || e.key === "ArrowDown";
+    const isPrev = e.key === "ArrowLeft" || e.key === "ArrowUp";
     if (!isNext && !isPrev) return;
 
     e.preventDefault();
@@ -46,7 +46,7 @@ export const CompensationSelector = ({ id, label, value, onChange, error }) => {
               role="radio"
               aria-checked={isSelected}
               tabIndex={isSelected || (!value && index === 0) ? 0 : -1}
-              className={`compensation-option ${isSelected ? 'compensation-selected' : ''}`}
+              className={`compensation-option ${isSelected ? "compensation-selected" : ""}`}
               onClick={() => onChange(option.value)}
               onKeyDown={(e) => handleKeyDown(e, index)}
             >

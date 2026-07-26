@@ -1,12 +1,5 @@
-import './CategoryFilter.scss';
-
-const CATEGORIES = [
-  { value: null, label: 'Todos' },
-  { value: 'PHOTOGRAPHY_VIDEO', label: 'Foto/Vídeo' },
-  { value: 'PRODUCTION', label: 'Producción' },
-  { value: 'MAKEUP', label: 'Makeup' },
-  { value: 'MODEL_TALENT', label: 'Modelo/Talento' },
-];
+import { CATEGORIES } from "../../../../utils/constants";
+import "./CategoryFilter.scss";
 
 export const CategoryFilter = ({ value, onChange }) => (
   <div className="category-filter" role="tablist" aria-label="Filtrar por categoría">
@@ -18,7 +11,7 @@ export const CategoryFilter = ({ value, onChange }) => (
           type="button"
           role="tab"
           aria-selected={isActive}
-          className={`category-filter-chip ${isActive ? 'category-filter-active' : ''}`}
+          className={`category-filter-chip ${isActive ? "category-filter-active" : ""}`}
           onClick={() => onChange(cat.value)}
         >
           {cat.label}

@@ -2,22 +2,9 @@ import { Link } from "react-router-dom";
 import { MapPin, Calendar } from "lucide-react";
 import { CategoryBadge } from "../CategoryBadge/CategoryBadge";
 import { StatusBadge } from "../StatusBadge/StatusBadge";
+import { formatDateRange } from "../../../../utils/formatDate";
+import { COMPENSATION_LABEL, CATEGORY_CONFIG } from "../../../../utils/constants";
 import "./OfferCard.scss";
-
-const COMPENSATION_LABEL = {
-  PAID: "Remunerado",
-  COLLABORATION: "Colaboración",
-};
-
-const formatDateRange = (startDate, endDate) => {
-  const options = { day: "numeric", month: "short", year: "numeric" };
-  const start = new Date(startDate).toLocaleDateString("es-ES", options);
-
-  if (startDate === endDate) return start;
-
-  const end = new Date(endDate).toLocaleDateString("es-ES", options);
-  return `${start} – ${end}`;
-};
 
 export const OfferCard = ({ offer }) => {
   const {
@@ -31,14 +18,7 @@ export const OfferCard = ({ offer }) => {
     compensationType,
   } = offer;
 
-  const CATEGORY_CLASS = {
-    MAKEUP: "specialty-sfx",
-    PHOTOGRAPHY_VIDEO: "specialty-photo",
-    MODEL_TALENT: "specialty-model",
-    PRODUCTION: "specialty-prod",
-  };
-
-  const categoryClass = CATEGORY_CLASS[category] || "";
+  const categoryClass = CATEGORY_CONFIG[category]?.className || "";
 
   return (
     <article className={`offer-card ${categoryClass}`}>

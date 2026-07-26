@@ -1,23 +1,36 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { offerService } from '../../services/offerService';
-import { FormInput } from '../../components/ui/FormInput/FormInput';
-import { SubmitButton } from '../../components/ui/SubmitButton/SubmitButton';
-import { SpecialtySelector } from '../../components/common/auth/SpecialtySelector/SpecialtySelector';
-import { CompensationSelector } from '../../components/common/offers/CompensationSelector/CompensationSelector';
-import './OfferFormPage.scss';
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { offerService } from "../../services/offerService";
+import { FormInput } from "../../components/ui/FormInput/FormInput";
+import { SubmitButton } from "../../components/ui/SubmitButton/SubmitButton";
+import { SpecialtySelector } from "../../components/common/auth/SpecialtySelector/SpecialtySelector";
+import { CompensationSelector } from "../../components/common/offers/CompensationSelector/CompensationSelector";
+import "./OfferFormPage.scss";
 
-const REQUIREMENTS_SEPARATOR = '\n\nRequisitos:\n';
+const REQUIREMENTS_SEPARATOR = "\n\nRequisitos:\n";
+
+const parseDescriptionAndRequirements = (fullDescription) => {
+  const separatorIndex = fullDescription.indexOf(REQUIREMENTS_SEPARATOR);
+
+  if (separatorIndex === -1) {
+    return { description: fullDescription, requirements: "" };
+  }
+
+  return {
+    description: fullDescription.slice(0, separatorIndex),
+    requirements: fullDescription.slice(separatorIndex + REQUIREMENTS_SEPARATOR.length),
+  };
+};
 
 const INITIAL_STATE = {
-  title: '',
+  title: "",
   category: null,
-  location: '',
-  startDate: '',
-  endDate: '',
+  location: "",
+  startDate: "",
+  endDate: "",
   compensationType: null,
-  description: '',
-  requirements: '',
+  description: "",
+  requirements: "",
 };
 
 export const OfferFormPage = () => {
@@ -37,17 +50,7 @@ export const OfferFormPage = () => {
     const fetchOffer = async () => {
       try {
         const offer = await offerService.getById(id);
-
-        // Reconstruye description/requirements a partir del separador fijo
-        // que usamos al concatenar — evita que el usuario tenga que
-        // cortar/pegar texto manualmente entre ambos campos.
-        const separatorIndex = offer.description.indexOf(REQUIREMENTS_SEPARATOR);
-        const description = separatorIndex !== -1
-          ? offer.description.slice(0, separatorIndex)
-          : offer.description;
-        const requirements = separatorIndex !== -1
-          ? offer.description.slice(separatorIndex + REQUIREMENTS_SEPARATOR.length)
-          : '';
+        const { description, requirements } = parseDescriptionAndRequirements(offer.description);
 
         setFormData({
           title: offer.title,
@@ -59,8 +62,8 @@ export const OfferFormPage = () => {
           description,
           requirements,
         });
-      } catch (err) {
-        setGeneralError('No se pudo cargar la oferta para editar.');
+      } catch {
+        setGeneralError("No se pudo cargar la oferta para editar.");
       } finally {
         setIsFetching(false);
       }
@@ -70,7 +73,7 @@ export const OfferFormPage = () => {
   }, [id, isEditMode]);
 
   const updateField = (field) => (e) => {
-    const value = typeof e === 'string' ? e : e.target.value;
+    const value = typeof e === "string" ? e : e.target.value;
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (fieldErrors[field]) {
       setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -112,9 +115,9 @@ export const OfferFormPage = () => {
       if (status === 400 && data?.fields) {
         setFieldErrors(data.fields);
       } else if (status === 403) {
-        setGeneralError(data?.error || 'No tienes permiso para realizar esta acción');
+        setGeneralError(data?.error || "No tienes permiso para realizar esta acción");
       } else {
-        setGeneralError(data?.error || 'Ocurrió un error inesperado. Inténtalo de nuevo.');
+        setGeneralError(data?.error || "Ocurrió un error inesperado. Inténtalo de nuevo.");
       }
     } finally {
       setIsLoading(false);
@@ -132,7 +135,7 @@ export const OfferFormPage = () => {
   return (
     <div className="offer-form-page">
       <div className="offer-form-header">
-        <h1>{isEditMode ? 'Editar Oferta' : 'Crear Oferta'}</h1>
+        <h1>{isEditMode ? "Editar Oferta" : "Crear Oferta"}</h1>
         <button
           type="button"
           className="offer-form-close"
@@ -156,7 +159,7 @@ export const OfferFormPage = () => {
             label="Título del Proyecto"
             placeholder="Ej. Sesión de fotos editorial moda"
             value={formData.title}
-            onChange={updateField('title')}
+            onChange={updateField("title")}
             error={fieldErrors.title}
             required
           />
@@ -165,7 +168,7 @@ export const OfferFormPage = () => {
             id="category"
             label="Categoría Requerida"
             value={formData.category}
-            onChange={updateField('category')}
+            onChange={updateField("category")}
             error={fieldErrors.category}
           />
 
@@ -174,7 +177,7 @@ export const OfferFormPage = () => {
             label="Ubicación"
             placeholder="Ciudad o Estudio"
             value={formData.location}
-            onChange={updateField('location')}
+            onChange={updateField("location")}
             error={fieldErrors.location}
             required
           />
@@ -184,7 +187,7 @@ export const OfferFormPage = () => {
             type="date"
             label="Fecha Inicio"
             value={formData.startDate}
-            onChange={updateField('startDate')}
+            onChange={updateField("startDate")}
             error={fieldErrors.startDate}
             required
           />
@@ -194,7 +197,7 @@ export const OfferFormPage = () => {
             type="date"
             label="Fecha Fin"
             value={formData.endDate}
-            onChange={updateField('endDate')}
+            onChange={updateField("endDate")}
             error={fieldErrors.endDate}
             required
           />
@@ -203,7 +206,7 @@ export const OfferFormPage = () => {
             id="compensationType"
             label="Tipo de Compensación"
             value={formData.compensationType}
-            onChange={updateField('compensationType')}
+            onChange={updateField("compensationType")}
             error={fieldErrors.compensationType}
           />
 
@@ -213,7 +216,7 @@ export const OfferFormPage = () => {
               id="description"
               placeholder="Describe los detalles, el mood de la sesión y lo que esperas del talento..."
               value={formData.description}
-              onChange={updateField('description')}
+              onChange={updateField("description")}
               rows={4}
               required
             />
@@ -230,13 +233,13 @@ export const OfferFormPage = () => {
               id="requirements"
               placeholder="Experiencia, materiales propios, disponibilidad..."
               value={formData.requirements}
-              onChange={updateField('requirements')}
+              onChange={updateField("requirements")}
               rows={4}
             />
           </div>
 
           <SubmitButton isLoading={isLoading} loadingText="Publicando...">
-            {isEditMode ? 'Guardar Cambios' : 'Publicar Anuncio'}
+            {isEditMode ? "Guardar Cambios" : "Publicar Anuncio"}
           </SubmitButton>
 
           <button

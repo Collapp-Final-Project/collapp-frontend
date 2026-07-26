@@ -23,8 +23,6 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<MainLayout />}>
               <Route path="/feed" element={<FeedPage />} />
-              <Route path="/offers/new" element={<OfferFormPage />} />
-              <Route path="/offers/:id/edit" element={<OfferFormPage />} />
               <Route path="/offers/:id" element={<OfferDetailPage />} />
               <Route path="/applications" element={<ApplicationsPage />} />
               <Route path="/profile" element={<ProfilePage />} />

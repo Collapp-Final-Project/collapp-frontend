@@ -1,8 +1,8 @@
-import axiosClient from '../api/axiosClient';
+import axiosClient from "../api/axiosClient";
 
 export const offerService = {
   async list(params = {}) {
-    const response = await axiosClient.get('/offers', { params });
+    const response = await axiosClient.get("/offers", { params });
     return response.data;
   },
 
@@ -12,7 +12,7 @@ export const offerService = {
   },
 
   async create(offerData) {
-    const response = await axiosClient.post('/offers', offerData);
+    const response = await axiosClient.post("/offers", offerData);
     return response.data;
   },
 
@@ -22,7 +22,7 @@ export const offerService = {
   },
 
   async updateStatus(id, status) {
-  const response = await axiosClient.patch(`/offers/${id}/status`, { status });
+    const response = await axiosClient.patch(`/offers/${id}/status`, { status });
   return response.data;
 },
 

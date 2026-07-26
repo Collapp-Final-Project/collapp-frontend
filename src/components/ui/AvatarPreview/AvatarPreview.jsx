@@ -1,14 +1,11 @@
-import { useState, useEffect } from 'react';
-import { Image as ImageIcon } from 'lucide-react';
-import './AvatarPreview.scss';
+import { useState } from "react";
+import { Image as ImageIcon } from "lucide-react";
+import "./AvatarPreview.scss";
 
 export const AvatarPreview = ({ src }) => {
-  const [hasError, setHasError] = useState(false);
+  const [errorSrc, setErrorSrc] = useState(null);
 
-  useEffect(() => {
-    setHasError(false);
-  }, [src]);
-
+  const hasError = errorSrc === src;
   const showImage = src && !hasError;
 
   return (
@@ -18,7 +15,7 @@ export const AvatarPreview = ({ src }) => {
           src={src}
           alt="Vista previa de tu foto de perfil"
           className="avatar-preview-image"
-          onError={() => setHasError(true)}
+          onError={() => setErrorSrc(src)}
         />
       ) : (
         <div className="avatar-preview-placeholder" aria-hidden="true">

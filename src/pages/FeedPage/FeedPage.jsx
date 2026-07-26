@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Search } from 'lucide-react';
-import { offerService } from '../../services/offerService';
-import { CategoryFilter } from '../../components/common/offers/CategoryFilter/CategoryFilter';
-import { OfferCard } from '../../components/common/offers/OfferCard/OfferCard';
-import './FeedPage.scss';
+import { useEffect, useState } from "react";
+import { Search } from "lucide-react";
+import { offerService } from "../../services/offerService";
+import { CategoryFilter } from "../../components/common/offers/CategoryFilter/CategoryFilter";
+import { OfferCard } from "../../components/common/offers/OfferCard/OfferCard";
+import "./FeedPage.scss";
 
 export const FeedPage = () => {
   const [offers, setOffers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [category, setCategory] = useState(null);
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     let isCancelled = false;
@@ -24,9 +24,9 @@ export const FeedPage = () => {
         if (!isCancelled) {
           setOffers(data.content);
         }
-      } catch (err) {
+      } catch {
         if (!isCancelled) {
-          setError('No se pudieron cargar las ofertas. Inténtalo de nuevo.');
+          setError("No se pudieron cargar las ofertas. Inténtalo de nuevo.");
         }
       } finally {
         if (!isCancelled) setIsLoading(false);
@@ -39,8 +39,7 @@ export const FeedPage = () => {
     };
   }, [category]);
 
-  // Filtro client-side por título — limitación conocida: solo busca sobre
-  // las ofertas ya cargadas, no sobre toda la base de datos (ver nota en chat)
+  // Filtro client-side por título: solo busca sobre las ofertas ya cargadas
   const visibleOffers = offers.filter((offer) =>
     offer.title.toLowerCase().includes(searchText.toLowerCase())
   );

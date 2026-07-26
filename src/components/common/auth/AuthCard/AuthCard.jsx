@@ -1,4 +1,4 @@
-import './AuthCard.scss';
+import "./AuthCard.scss";
 
 
 export const AuthCard = ({ title, subtitle, children, footer }) => (
