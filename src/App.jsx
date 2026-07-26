@@ -6,6 +6,7 @@ import { FeedPage } from "./pages/FeedPage/FeedPage";
 import { OfferDetailPage } from "./pages/OfferDetailPage/OfferDetailPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { ApplicationsPage } from "./pages/ApplicationsPage/ApplicationsPage";
+import { MyPublicationsPage } from "./pages/MyPublicationsPage/MyPublicationsPage";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { MainLayout } from "./components/layout/MainLayout/MainLayout";
 import { OfferFormPage } from "./pages/OfferFormPage/OfferFormPage";
@@ -24,6 +25,7 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/feed" element={<FeedPage />} />
               <Route path="/offers/:id" element={<OfferDetailPage />} />
+              <Route path="/my-offers" element={<MyPublicationsPage />} />
               <Route path="/applications" element={<ApplicationsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>

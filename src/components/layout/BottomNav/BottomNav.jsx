@@ -4,7 +4,7 @@ import "./BottomNav.scss";
 
 const NAV_ITEMS = [
   { to: "/feed", label: "Feed", icon: Home },
-  { to: "/offers/new", label: "Publica.", icon: PlusSquare },
+  { to: "/my-offers", label: "Publica.", icon: PlusSquare },
   { to: "/applications", label: "Postul.", icon: ClipboardList },
   { to: "/profile", label: "Perfil", icon: User },
 ];
