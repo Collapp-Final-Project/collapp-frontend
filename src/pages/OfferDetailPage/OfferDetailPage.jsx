@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Banknote, Handshake, ChevronDown } from "lucide-react";
+import {
+  ArrowLeft,
+  MapPin,
+  Calendar,
+  Banknote,
+  Handshake,
+  ChevronDown,
+} from "lucide-react";
 import { offerService } from "../../services/offerService";
 import { useAuth } from "../../hooks/useAuth";
 import { CategoryBadge } from "../../components/common/offers/CategoryBadge/CategoryBadge";
@@ -9,6 +16,8 @@ import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog/ConfirmDialog";
 import { formatDateRange } from "../../utils/formatDate";
 import { COMPENSATION_LABEL, STATUS_OPTIONS } from "../../utils/constants";
+import { applicationService } from "../../services/applicationService";
+import { OfferApplicationBox } from "../../components/common/applications/OfferApplicationBox/OfferApplicationBox";
 import "./OfferDetailPage.scss";
 
 const COMPENSATION_ICON = {
@@ -25,6 +34,9 @@ export const OfferDetailPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isSubmittingApplication, setIsSubmittingApplication] = useState(false);
+  const [applicationError, setApplicationError] = useState(null);
+  const [hasApplied, setHasApplied] = useState(false);
 
   useEffect(() => {
     let isCancelled = false;
@@ -40,7 +52,7 @@ export const OfferDetailPage = () => {
           setError(
             err.response?.status === 404
               ? "Esta oferta ya no existe."
-              : "No se pudo cargar la oferta."
+              : "No se pudo cargar la oferta.",
           );
         }
       } finally {
@@ -61,6 +73,25 @@ export const OfferDetailPage = () => {
       setOffer(updated);
     } catch {
       setError("No se pudo actualizar el estado.");
+    }
+  };
+  const handleApply = async (message) => {
+    setIsSubmittingApplication(true);
+    setApplicationError(null);
+
+    try {
+      await applicationService.create(offer.id, message);
+      setHasApplied(true);
+    } catch (err) {
+      if (err.response?.status === 409) {
+        setApplicationError("Ya te has postulado a esta oferta.");
+      } else if (err.response?.status === 400) {
+        setApplicationError("No puedes postularte a tu propia oferta.");
+      } else {
+        setApplicationError("Ha ocurrido un error al enviar tu postulación.");
+      }
+    } finally {
+      setIsSubmittingApplication(false);
     }
   };
 
@@ -114,10 +145,16 @@ export const OfferDetailPage = () => {
                 aria-label="Cambiar estado de la oferta"
               >
                 {STATUS_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
                 ))}
               </select>
-              <ChevronDown size={14} className="status-select-icon" aria-hidden="true" />
+              <ChevronDown
+                size={14}
+                className="status-select-icon"
+                aria-hidden="true"
+              />
             </div>
           ) : (
             <StatusBadge status={offer.status} />
@@ -129,11 +166,15 @@ export const OfferDetailPage = () => {
             <MapPin size={16} aria-hidden="true" /> {offer.location}
           </span>
           <span>
-            <Calendar size={16} aria-hidden="true" /> {formatDateRange(offer.startDate, offer.endDate)}
+            <Calendar size={16} aria-hidden="true" />{" "}
+            {formatDateRange(offer.startDate, offer.endDate)}
           </span>
           <span>
-            {CompensationIcon && <CompensationIcon size={16} aria-hidden="true" />}
-            {COMPENSATION_LABEL[offer.compensationType] || offer.compensationType}
+            {CompensationIcon && (
+              <CompensationIcon size={16} aria-hidden="true" />
+            )}
+            {COMPENSATION_LABEL[offer.compensationType] ||
+              offer.compensationType}
           </span>
         </div>
 
@@ -144,7 +185,10 @@ export const OfferDetailPage = () => {
 
         {isOwner ? (
           <div className="offer-detail-owner-actions">
-            <Link to={`/offers/${offer.id}/edit`} className="offer-detail-edit-button">
+            <Link
+              to={`/offers/${offer.id}/edit`}
+              className="offer-detail-edit-button"
+            >
               Editar Oferta
             </Link>
             <button
@@ -155,10 +199,19 @@ export const OfferDetailPage = () => {
               Eliminar Oferta
             </button>
           </div>
+       ) : hasApplied ? (
+          <p className="offer-detail-applied-message" role="status">
+            ¡Te has inscrito correctamente en este proyecto!
+          </p>
         ) : (
-          <button className="offer-detail-cta" type="button">
-            Postularme a este proyecto
-          </button>
+          <div className="offer-detail-apply-section">
+            {applicationError && (
+              <p className="offer-detail-apply-error" role="alert">
+                {applicationError}
+              </p>
+            )}
+            <OfferApplicationBox onSubmit={handleApply} isSubmitting={isSubmittingApplication} />
+          </div>
         )}
       </div>
 
@@ -166,7 +219,9 @@ export const OfferDetailPage = () => {
         <span className="offer-detail-publisher-label">Publicado por</span>
         <div className="offer-detail-publisher-info">
           <AvatarPreview src={null} />
-          <span className="offer-detail-publisher-name">{offer.creatorUsername}</span>
+          <span className="offer-detail-publisher-name">
+            {offer.creatorUsername}
+          </span>
         </div>
       </div>
 

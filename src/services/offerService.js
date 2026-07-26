@@ -29,4 +29,9 @@ export const offerService = {
   async remove(id) {
     await axiosClient.delete(`/offers/${id}`);
   },
+
+  async listMine() {
+  const response = await axiosClient.get("/offers/mine");
+  return response.data;
+},
 };

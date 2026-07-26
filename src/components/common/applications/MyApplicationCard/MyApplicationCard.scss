@@ -1,0 +1,75 @@
+.my-application-card {
+  background: $card-bg;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+  }
+
+  &-meta {
+    margin: 0 0 12px;
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+
+  &-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: $radius-button;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    margin-bottom: 12px;
+
+    &--blue {
+      background: rgba($color-azul-real, 0.1);
+      color: $color-azul-real;
+    }
+
+    &--green {
+      background: rgba($success-color, 0.1);
+      color: $success-color;
+    }
+
+    &--red {
+      background: rgba($error-color, 0.1);
+      color: $error-color;
+    }
+  }
+
+  &-contact {
+    background: $bg-page;
+    border-radius: $radius-input;
+    padding: 12px;
+    margin-bottom: 12px;
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $text-main;
+
+      &:first-child {
+        font-weight: $font-weight-semibold;
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  &-link {
+    display: inline-block;
+    color: $primary-color;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: $focus-ring-width solid $focus-ring-color;
+      outline-offset: 2px;
+    }
+  }
+}

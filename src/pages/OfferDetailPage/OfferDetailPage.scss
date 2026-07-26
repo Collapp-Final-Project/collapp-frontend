@@ -1,5 +1,5 @@
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
 
 .offer-detail-page {
   padding: 24px 16px;
@@ -197,4 +197,18 @@
 .offer-detail-publisher-name {
   font-weight: $font-weight-semibold;
   color: $text-main;
+}
+.offer-detail-applied-message {
+  padding: 12px 16px;
+  border-radius: $radius-input;
+  background: rgba($success-color, 0.1);
+  color: $success-color;
+  font-weight: $font-weight-medium;
+  text-align: center;
+}
+
+.offer-detail-apply-error {
+  color: $error-color;
+  font-size: $font-size-sm;
+  margin-bottom: 8px;
 }
