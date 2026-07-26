@@ -1,39 +1,38 @@
-import { createContext, useState, useEffect } from 'react';
-import { authService } from '../services/authService';
+import { createContext, useState } from "react";
+import { authService } from "../services/authService";
+import { STORAGE_KEYS } from "../utils/constants";
+
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-
-  useEffect(() => {
-    const savedToken = localStorage.getItem('collapp_token');
-    const savedUser = localStorage.getItem('collapp_user');
-
-    if (savedToken && savedUser) {
-      try {
-        setToken(savedToken);
-        setUser(JSON.parse(savedUser));
-      } catch (error) {
-        console.error('Error parseando el usuario almacenado:', error);
-        localStorage.removeItem('collapp_token');
-        localStorage.removeItem('collapp_user');
-      }
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem(STORAGE_KEYS.USER);
+    if (!savedUser) return null;
+    try {
+      return JSON.parse(savedUser);
+    } catch {
+      localStorage.removeItem(STORAGE_KEYS.TOKEN);
+      localStorage.removeItem(STORAGE_KEYS.USER);
+      return null;
     }
-    setLoading(false);
-  }, []);
+  });
+
+  const [token, setToken] = useState(() => {
+    const savedToken = localStorage.getItem(STORAGE_KEYS.TOKEN);
+    const savedUser = localStorage.getItem(STORAGE_KEYS.USER);
+    if (!savedToken || !savedUser) return null;
+    return savedToken;
+  });
 
   const login = async (credentials) => {
     const data = await authService.login(credentials);
-    
+
     setToken(data.token);
     setUser(data);
 
-    localStorage.setItem('collapp_token', data.token);
-    localStorage.setItem('collapp_user', JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data));
 
     return data;
   };
@@ -44,8 +43,8 @@ export const AuthProvider = ({ children }) => {
     setToken(data.token);
     setUser(data);
 
-    localStorage.setItem('collapp_token', data.token);
-    localStorage.setItem('collapp_user', JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data));
 
     return data;
   };
@@ -53,8 +52,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setToken(null);
     setUser(null);
-    localStorage.removeItem('collapp_token');
-    localStorage.removeItem('collapp_user');
+    localStorage.removeItem(STORAGE_KEYS.TOKEN);
+    localStorage.removeItem(STORAGE_KEYS.USER);
   };
 
   return (
@@ -63,13 +62,12 @@ export const AuthProvider = ({ children }) => {
         user,
         token,
         isAuthenticated: !!token,
-        loading,
         login,
         register,
         logout,
       }}
     >
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import './AuthFooter.scss';
+import { Link } from "react-router-dom";
+import "./AuthFooter.scss";
 
 export const AuthFooter = ({ prompt, linkText, to }) => (
   <div className="auth-footer">

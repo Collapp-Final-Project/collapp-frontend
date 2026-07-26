@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import { Mail } from 'lucide-react';
-import { AuthCard } from '../../components/common/auth/AuthCard/AuthCard';
-import { AuthFooter } from '../../components/common/auth/AuthFooter/AuthFooter';
-import { FormInput } from '../../components/ui/FormInput/FormInput';
-import { PasswordInput } from '../../components/ui/PasswordInput/PasswordInput';
-import { SubmitButton } from '../../components/ui/SubmitButton/SubmitButton';
-import './LoginPage.scss';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { Mail } from "lucide-react";
+import { AuthCard } from "../../components/common/auth/AuthCard/AuthCard";
+import { AuthFooter } from "../../components/common/auth/AuthFooter/AuthFooter";
+import { FormInput } from "../../components/ui/FormInput/FormInput";
+import { PasswordInput } from "../../components/ui/PasswordInput/PasswordInput";
+import { SubmitButton } from "../../components/ui/SubmitButton/SubmitButton";
+import "./LoginPage.scss";
 
 export const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,12 +24,12 @@ export const LoginPage = () => {
     setIsLoading(true);
     try {
       await login({ email, password });
-      navigate('/feed');
+      navigate("/feed");
     } catch (err) {
       setError(
         err.response?.status === 401
-          ? 'Email o contraseña incorrectos'
-          : 'Ocurrió un error inesperado. Inténtalo de nuevo.'
+          ? "Email o contraseña incorrectos"
+          : "Ocurrió un error inesperado. Inténtalo de nuevo."
       );
     } finally {
       setIsLoading(false);

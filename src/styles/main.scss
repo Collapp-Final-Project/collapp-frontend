@@ -10,7 +10,7 @@
 body {
   font-family: $font-base;
   color: $text-main;
-  background-color: $color-blanco;
+  background-color: $bg-page;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -22,7 +22,8 @@ button {
   @include focus-ring;
 }
 
-input {
+input,
+select {
   font-family: inherit;
   @include focus-ring;
 }

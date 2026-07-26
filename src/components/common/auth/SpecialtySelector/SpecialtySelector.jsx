@@ -1,16 +1,16 @@
-import './SpecialtySelector.scss';
+import "./SpecialtySelector.scss";
 
 const SPECIALTIES = [
-  { value: 'MAKEUP', label: 'SFX & Maquillaje', className: 'specialty-sfx' },
-  { value: 'PHOTOGRAPHY_VIDEO', label: 'Fotografía & Video', className: 'specialty-photo' },
-  { value: 'MODEL_TALENT', label: 'Modelo / Talento', className: 'specialty-model' },
-  { value: 'PRODUCTION', label: 'Producción', className: 'specialty-prod' },
+  { value: "MAKEUP", label: "SFX & Maquillaje", className: "specialty-sfx" },
+  { value: "PHOTOGRAPHY_VIDEO", label: "Fotografía & Video", className: "specialty-photo" },
+  { value: "MODEL_TALENT", label: "Modelo / Talento", className: "specialty-model" },
+  { value: "PRODUCTION", label: "Producción", className: "specialty-prod" },
 ];
 
 export const SpecialtySelector = ({ id, label, value, onChange, error }) => {
   const handleKeyDown = (e, index) => {
-    const isNext = e.key === 'ArrowRight' || e.key === 'ArrowDown';
-    const isPrev = e.key === 'ArrowLeft' || e.key === 'ArrowUp';
+    const isNext = e.key === "ArrowRight" || e.key === "ArrowDown";
+    const isPrev = e.key === "ArrowLeft" || e.key === "ArrowUp";
 
     if (!isNext && !isPrev) return;
 
@@ -48,7 +48,7 @@ export const SpecialtySelector = ({ id, label, value, onChange, error }) => {
               role="radio"
               aria-checked={isSelected}
               tabIndex={isSelected || (!value && index === 0) ? 0 : -1}
-              className={`specialty-option ${specialty.className} ${isSelected ? 'specialty-selected' : ''}`}
+              className={`specialty-option ${specialty.className} ${isSelected ? "specialty-selected" : ""}`}
               onClick={() => onChange(specialty.value)}
               onKeyDown={(e) => handleKeyDown(e, index)}
             >

@@ -1,4 +1,4 @@
-import './SubmitButton.scss';
+import "./SubmitButton.scss";
 
 export const SubmitButton = ({ isLoading, loadingText, children, ...rest }) => (
   <button

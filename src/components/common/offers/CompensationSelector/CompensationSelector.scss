@@ -1,0 +1,53 @@
+@use '../../../../styles/variables' as *;
+@use '../../../../styles/mixins' as *;
+
+.compensation-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.compensation-label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-main;
+}
+
+.compensation-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.compensation-option {
+  @include respect-motion-preference;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 14px 12px;
+  border-radius: $radius-input;
+  border: 2px solid $border-color;
+  background-color: $card-bg;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-main;
+  transition: border-color $transition-fast, background-color $transition-fast, color $transition-fast;
+
+  &:hover:not(.compensation-selected) {
+    border-color: $color-ink;
+  }
+
+  &:focus-visible {
+    outline: $focus-ring-width solid $color-ink;
+    outline-offset: 2px;
+  }
+
+  &.compensation-selected {
+    border-color: $primary-color;
+    background-color: $primary-color;
+    color: $color-blanco;
+  }
+}

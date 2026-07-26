@@ -1,0 +1,15 @@
+@use '../../../../styles/variables' as *;
+
+.category-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: $radius-button;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $text-main;
+
+  &.specialty-sfx { background-color: rgba($specialty-sfx, 0.3); }
+  &.specialty-photo { background-color: rgba($specialty-photo, 0.3); }
+  &.specialty-model { background-color: rgba($specialty-model, 0.3); }
+  &.specialty-prod { background-color: rgba($specialty-prod, 0.3); color: $color-blanco; }
+}
