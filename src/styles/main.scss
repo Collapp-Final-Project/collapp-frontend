@@ -22,7 +22,8 @@ button {
   @include focus-ring;
 }
 
-input {
+input,
+select {
   font-family: inherit;
   @include focus-ring;
 }

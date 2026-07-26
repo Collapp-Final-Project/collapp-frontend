@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Banknote, Handshake, ChevronDown } from "lucide-react";
 import { offerService } from "../../services/offerService";
 import { useAuth } from "../../hooks/useAuth";
 import { CategoryBadge } from "../../components/common/offers/CategoryBadge/CategoryBadge";
 import { StatusBadge } from "../../components/common/offers/StatusBadge/StatusBadge";
 import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
+import { ConfirmDialog } from "../../components/ui/ConfirmDialog/ConfirmDialog";
 import { formatDateRange } from "../../utils/formatDate";
 import { COMPENSATION_LABEL, STATUS_OPTIONS } from "../../utils/constants";
 import "./OfferDetailPage.scss";
+
+const COMPENSATION_ICON = {
+  PAID: Banknote,
+  COLLABORATION: Handshake,
+};
 
 export const OfferDetailPage = () => {
   const { id } = useParams();
@@ -18,6 +24,7 @@ export const OfferDetailPage = () => {
   const [offer, setOffer] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   useEffect(() => {
     let isCancelled = false;
@@ -57,17 +64,13 @@ export const OfferDetailPage = () => {
     }
   };
 
-  const handleDelete = async () => {
-    const confirmed = window.confirm(
-      "¿Seguro que quieres eliminar esta oferta? Esta acción no se puede deshacer."
-    );
-    if (!confirmed) return;
-
+  const confirmDelete = async () => {
     try {
       await offerService.remove(offer.id);
       navigate("/feed");
     } catch {
       setError("No se pudo eliminar la oferta.");
+      setIsDeleteDialogOpen(false);
     }
   };
 
@@ -88,6 +91,7 @@ export const OfferDetailPage = () => {
   }
 
   const isOwner = user?.username === offer.creatorUsername;
+  const CompensationIcon = COMPENSATION_ICON[offer.compensationType];
 
   return (
     <div className="offer-detail-page">
@@ -102,16 +106,19 @@ export const OfferDetailPage = () => {
           <CategoryBadge category={offer.category} />
 
           {isOwner ? (
-            <select
-              className="status-select-inline"
-              value={offer.status}
-              onChange={handleStatusChange}
-              aria-label="Cambiar estado de la oferta"
-            >
-              {STATUS_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+            <div className="status-select-wrapper">
+              <select
+                className="status-select-inline"
+                value={offer.status}
+                onChange={handleStatusChange}
+                aria-label="Cambiar estado de la oferta"
+              >
+                {STATUS_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+              <ChevronDown size={14} className="status-select-icon" aria-hidden="true" />
+            </div>
           ) : (
             <StatusBadge status={offer.status} />
           )}
@@ -124,7 +131,10 @@ export const OfferDetailPage = () => {
           <span>
             <Calendar size={16} aria-hidden="true" /> {formatDateRange(offer.startDate, offer.endDate)}
           </span>
-          <span>{COMPENSATION_LABEL[offer.compensationType] || offer.compensationType}</span>
+          <span>
+            {CompensationIcon && <CompensationIcon size={16} aria-hidden="true" />}
+            {COMPENSATION_LABEL[offer.compensationType] || offer.compensationType}
+          </span>
         </div>
 
         <section className="offer-detail-section">
@@ -137,8 +147,12 @@ export const OfferDetailPage = () => {
             <Link to={`/offers/${offer.id}/edit`} className="offer-detail-edit-button">
               Editar Oferta
             </Link>
-            <button type="button" className="offer-detail-delete-button" onClick={handleDelete}>
-              Eliminar
+            <button
+              type="button"
+              className="offer-detail-delete-button"
+              onClick={() => setIsDeleteDialogOpen(true)}
+            >
+              Eliminar Oferta
             </button>
           </div>
         ) : (
@@ -155,6 +169,16 @@ export const OfferDetailPage = () => {
           <span className="offer-detail-publisher-name">{offer.creatorUsername}</span>
         </div>
       </div>
+
+      <ConfirmDialog
+        isOpen={isDeleteDialogOpen}
+        title="Eliminar oferta"
+        message="¿Seguro que quieres eliminar esta oferta? Esta acción no se puede deshacer."
+        confirmLabel="Eliminar"
+        cancelLabel="Cancelar"
+        onConfirm={confirmDelete}
+        onCancel={() => setIsDeleteDialogOpen(false)}
+      />
     </div>
   );
 };
