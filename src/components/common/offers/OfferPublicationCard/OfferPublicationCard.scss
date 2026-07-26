@@ -1,0 +1,86 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.offer-publication-card {
+  background: $card-bg;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+    margin: 0 0 8px;
+  }
+
+  &-description {
+    color: $text-muted;
+    font-size: $font-size-sm;
+    margin-bottom: 16px;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &-toggle {
+    @include focus-ring;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: $color-ink;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    padding: 0;
+
+    &:disabled {
+      color: $text-muted;
+      cursor: default;
+    }
+  }
+
+  &-details {
+    @include focus-ring;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-ink;
+    color: $color-blanco;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: $radius-button;
+    white-space: nowrap;
+  }
+
+  &-applicants {
+    margin-top: 16px;
+    border-top: 1px solid $border-color;
+    padding-top: 16px;
+
+    h3 {
+      margin: 0 0 12px;
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      color: $text-main;
+    }
+  }
+}
