@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { PlayCircle, PauseCircle, Ban } from "lucide-react";
 import { offerService } from "../../services/offerService";
 import { FormInput } from "../../components/ui/FormInput/FormInput";
 import { SubmitButton } from "../../components/ui/SubmitButton/SubmitButton";
 import { SpecialtySelector } from "../../components/common/auth/SpecialtySelector/SpecialtySelector";
 import { CompensationSelector } from "../../components/common/offers/CompensationSelector/CompensationSelector";
+import { STATUS_CONFIG } from "../../utils/constants";
 import "./OfferFormPage.scss";
 
 const REQUIREMENTS_SEPARATOR = "\n\nRequisitos:\n";
@@ -29,8 +31,15 @@ const INITIAL_STATE = {
   startDate: "",
   endDate: "",
   compensationType: null,
+  status: "OPEN",
   description: "",
   requirements: "",
+};
+
+const STATUS_ICON = {
+  OPEN: PlayCircle,
+  PAUSED: PauseCircle,
+  COVERED: Ban,
 };
 
 export const OfferFormPage = () => {
@@ -59,6 +68,7 @@ export const OfferFormPage = () => {
           startDate: offer.startDate,
           endDate: offer.endDate,
           compensationType: offer.compensationType,
+          status: offer.status,
           description,
           requirements,
         });
@@ -98,6 +108,7 @@ export const OfferFormPage = () => {
       startDate: formData.startDate,
       endDate: formData.endDate,
       compensationType: formData.compensationType,
+      status: formData.status,
     };
 
     try {
@@ -209,6 +220,26 @@ export const OfferFormPage = () => {
             onChange={updateField("compensationType")}
             error={fieldErrors.compensationType}
           />
+
+          <div className="offer-form-status-group">
+            <label>Estado</label>
+            <div className="offer-form-status-options">
+              {Object.entries(STATUS_CONFIG).map(([value, { label }]) => {
+                  const Icon = STATUS_ICON[value];
+                  return (
+                    <button
+                      key={value}
+                      type="button"
+                      className={`offer-form-status-option${formData.status === value ? " active" : ""}`}
+                      onClick={() => updateField("status")(value)}
+                    >
+                      {Icon && <Icon size={16} aria-hidden="true" />}
+                      {label}
+                    </button>
+                  );
+                })}
+            </div>
+          </div>
 
           <div className="offer-form-textarea-group">
             <label htmlFor="description">Descripción</label>

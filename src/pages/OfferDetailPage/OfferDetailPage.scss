@@ -91,32 +91,6 @@
   white-space: pre-line;
 }
 
-.status-select-wrapper {
-  position: relative;
-  display: inline-flex;
-}
-
-.status-select-inline {
-  appearance: none;
-  font-family: inherit;
-  background-color: $input-bg;
-  border: 1px solid $border-color;
-  border-radius: $radius-button;
-  padding: 4px 28px 4px 12px;
-  font-size: $font-size-xs;
-  font-weight: $font-weight-semibold;
-  color: $text-main;
-}
-
-.status-select-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: $text-muted;
-  pointer-events: none;
-}
-
 .offer-detail-owner-actions {
   display: flex;
   gap: 12px;
@@ -127,13 +101,15 @@
   @include focus-ring;
 
   flex: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   background-color: $primary-color;
   color: $color-blanco;
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
   border-radius: $radius-button;
+  font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
 }
 
@@ -141,11 +117,15 @@
   @include focus-ring;
 
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: 1px solid $error-color;
   color: $error-color;
-  height: 48px;
+  height: 40px;
   border-radius: $radius-button;
+  font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
 
   &:hover {

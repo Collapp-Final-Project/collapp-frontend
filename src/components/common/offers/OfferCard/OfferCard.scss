@@ -53,11 +53,15 @@
 .offer-card-link {
   @include focus-ring;
 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: $color-ink;
   color: $color-blanco;
   font-size: $font-size-sm;
   font-weight: $font-weight-semibold;
-  padding: 10px 20px;
+  height: 40px;
+  padding: 0 20px;
   border-radius: $radius-button;
   text-decoration: none;
 }

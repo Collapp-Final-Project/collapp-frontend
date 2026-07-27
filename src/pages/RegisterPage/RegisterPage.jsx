@@ -5,6 +5,7 @@ import {
   Mail,
   User,
   AtSign,
+  AlignLeft,
   Link as LinkIcon,
   Image as ImageIcon,
 } from "lucide-react";
@@ -15,6 +16,7 @@ import { FormInput } from "../../components/ui/FormInput/FormInput";
 import { PasswordInput } from "../../components/ui/PasswordInput/PasswordInput";
 import { SubmitButton } from "../../components/ui/SubmitButton/SubmitButton";
 import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
+import { TextareaInput } from "../../components/ui/TextareaInput/TextareaInput";
 import "./RegisterPage.scss";
 
 const TOTAL_STEPS = 2;
@@ -28,6 +30,7 @@ export const RegisterPage = () => {
     email: "",
     password: "",
     specialty: null,
+    bio: "",
     avatarUrl: "",
     username: "",
     portfolioUrl: "",
@@ -196,6 +199,14 @@ export const RegisterPage = () => {
       ) : (
         <form onSubmit={handleSubmit} className="register-form" noValidate>
           <AvatarPreview src={formData.avatarUrl} />
+          <TextareaInput
+            id="bio"
+            label="Biografía"
+            icon={AlignLeft}
+            placeholder="Cuéntanos sobre ti..."
+            value={formData.bio}
+            onChange={updateField("bio")}
+          />
           <FormInput
             id="avatarUrl"
             type="url"
