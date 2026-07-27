@@ -6,7 +6,6 @@ import {
   Calendar,
   Banknote,
   Handshake,
-  ChevronDown,
 } from "lucide-react";
 import { offerService } from "../../services/offerService";
 import { useAuth } from "../../hooks/useAuth";
@@ -15,7 +14,7 @@ import { StatusBadge } from "../../components/common/offers/StatusBadge/StatusBa
 import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
 import { ConfirmDialog } from "../../components/ui/ConfirmDialog/ConfirmDialog";
 import { formatDateRange } from "../../utils/formatDate";
-import { COMPENSATION_LABEL, STATUS_OPTIONS } from "../../utils/constants";
+import { COMPENSATION_LABEL } from "../../utils/constants";
 import { applicationService } from "../../services/applicationService";
 import { OfferApplicationBox } from "../../components/common/applications/OfferApplicationBox/OfferApplicationBox";
 import "./OfferDetailPage.scss";
@@ -66,15 +65,6 @@ export const OfferDetailPage = () => {
     };
   }, [id]);
 
-  const handleStatusChange = async (e) => {
-    const newStatus = e.target.value;
-    try {
-      const updated = await offerService.updateStatus(offer.id, newStatus);
-      setOffer(updated);
-    } catch {
-      setError("No se pudo actualizar el estado.");
-    }
-  };
   const handleApply = async (message) => {
     setIsSubmittingApplication(true);
     setApplicationError(null);
@@ -135,30 +125,7 @@ export const OfferDetailPage = () => {
 
         <div className="offer-detail-badges">
           <CategoryBadge category={offer.category} />
-
-          {isOwner ? (
-            <div className="status-select-wrapper">
-              <select
-                className="status-select-inline"
-                value={offer.status}
-                onChange={handleStatusChange}
-                aria-label="Cambiar estado de la oferta"
-              >
-                {STATUS_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown
-                size={14}
-                className="status-select-icon"
-                aria-hidden="true"
-              />
-            </div>
-          ) : (
-            <StatusBadge status={offer.status} />
-          )}
+          <StatusBadge status={offer.status} />
         </div>
 
         <div className="offer-detail-meta">

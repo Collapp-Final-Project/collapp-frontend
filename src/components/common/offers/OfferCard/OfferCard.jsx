@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
-import { MapPin, Calendar } from "lucide-react";
+import { MapPin, Calendar, Banknote, Handshake } from "lucide-react";
 import { CategoryBadge } from "../CategoryBadge/CategoryBadge";
 import { StatusBadge } from "../StatusBadge/StatusBadge";
 import { formatDateRange } from "../../../../utils/formatDate";
 import { COMPENSATION_LABEL, CATEGORY_CONFIG } from "../../../../utils/constants";
 import "./OfferCard.scss";
+
+const COMPENSATION_ICON = {
+  PAID: Banknote,
+  COLLABORATION: Handshake,
+};
 
 export const OfferCard = ({ offer }) => {
   const {
@@ -19,6 +24,7 @@ export const OfferCard = ({ offer }) => {
   } = offer;
 
   const categoryClass = CATEGORY_CONFIG[category]?.className || "";
+  const CompensationIcon = COMPENSATION_ICON[compensationType];
 
   return (
     <article className={`offer-card ${categoryClass}`}>
@@ -37,7 +43,10 @@ export const OfferCard = ({ offer }) => {
           <Calendar size={14} aria-hidden="true" />{" "}
           {formatDateRange(startDate, endDate)}
         </span>
-        <span>{COMPENSATION_LABEL[compensationType] || compensationType}</span>
+        <span>
+          {CompensationIcon && <CompensationIcon size={14} aria-hidden="true" />}
+          {COMPENSATION_LABEL[compensationType] || compensationType}
+        </span>
       </div>
 
       <div className="offer-card-footer">

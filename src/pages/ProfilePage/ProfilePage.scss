@@ -65,6 +65,86 @@
   font-size: $font-size-sm;
   color: $text-main;
   line-height: 1.6;
+  width: 100%;
+}
+
+.profile-page-bio-placeholder {
+  color: $text-placeholder;
+}
+
+.profile-page-bio-edit-button {
+  @include focus-ring;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 0 22px;
+  height: 32px;
+  background-color: $color-ink;
+  color: white;
+  border: none;
+  border-radius: $radius-button;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.profile-page-bio-edit {
+  width: 100%;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.profile-page-bio-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+
+  button {
+    @include focus-ring;
+
+    flex: 1;
+    height: 40px;
+    border-radius: $radius-button;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+
+    &:first-child {
+      background: none;
+      border: 1px solid $error-color;
+      color: $error-color;
+
+      &:hover {
+        background-color: rgba($error-color, 0.08);
+      }
+    }
+
+    &:last-child {
+      background: $primary-color;
+      border: none;
+      color: white;
+
+      &:hover {
+        background: $primary-hover;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
 }
 
 .profile-page-links {
@@ -99,6 +179,7 @@
   color: $error-color;
   border-radius: $radius-button;
   font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
 
   &:hover {
     background-color: rgba($error-color, 0.08);

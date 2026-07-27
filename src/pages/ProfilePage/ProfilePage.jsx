@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { LogOut, Link, Link2 } from "lucide-react";
+import { LogOut, Link, Link2, AlignLeft, Check, X, Pencil } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { userService } from "../../services/userService";
 import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
+import { TextareaInput } from "../../components/ui/TextareaInput/TextareaInput";
 import { CategoryBadge } from "../../components/common/offers/CategoryBadge/CategoryBadge";
 import "./ProfilePage.scss";
 
@@ -11,6 +12,9 @@ export const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingBio, setEditingBio] = useState(false);
+  const [bioDraft, setBioDraft] = useState("");
+  const [savingBio, setSavingBio] = useState(false);
 
   useEffect(() => {
     let isCancelled = false;
@@ -62,7 +66,61 @@ export const ProfilePage = () => {
         <h1>{profile.fullName}</h1>
         <CategoryBadge category={profile.specialty} />
 
-        {profile.bio && <p className="profile-page-bio">{profile.bio}</p>}
+        {editingBio ? (
+          <div className="profile-page-bio-edit">
+            <TextareaInput
+              id="bio"
+              label="Biografía"
+              icon={AlignLeft}
+              placeholder="Cuéntanos sobre ti..."
+              value={bioDraft}
+              onChange={(e) => setBioDraft(e.target.value)}
+            />
+            <div className="profile-page-bio-actions">
+              <button
+                type="button"
+                onClick={() => setEditingBio(false)}
+              >
+                <X size={16} aria-hidden="true" /> Cancelar
+              </button>
+              <button
+                type="button"
+                disabled={savingBio}
+                onClick={async () => {
+                  setSavingBio(true);
+                  try {
+                    const updated = await userService.updateMe({ bio: bioDraft });
+                    setProfile(updated);
+                    setEditingBio(false);
+                  } finally {
+                    setSavingBio(false);
+                  }
+                }}
+              >
+                <Check size={16} aria-hidden="true" />
+                {savingBio ? "Guardando..." : "Guardar"}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
+            <p
+              className={`profile-page-bio${profile.bio ? "" : " profile-page-bio-placeholder"}`}
+            >
+              {profile.bio || "Añade una biografía..."}
+            </p>
+            <button
+              type="button"
+              className="profile-page-bio-edit-button"
+              onClick={() => {
+                setBioDraft(profile.bio || "");
+                setEditingBio(true);
+              }}
+            >
+              <Pencil size={14} aria-hidden="true" /> Editar
+            </button>
+          </>
+        )}
 
         <div className="profile-page-links">
           {profile.instagramUrl && (
