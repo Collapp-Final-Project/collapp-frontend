@@ -1,11 +1,9 @@
-// MyApplicationCard.jsx
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { APPLICATION_STATUS_CONFIG } from "../../../../utils/constants";
-import { formatDateRange } from "../../../../utils/formatDate";
+import { formatRelativeDate } from "../../../../utils/formatDate";
 import "./MyApplicationCard.scss";
 
-function MyApplicationCard({ application }) {
+export const MyApplicationCard = ({ application }) => {
   const {
     offerId,
     offerTitle,
@@ -21,31 +19,35 @@ function MyApplicationCard({ application }) {
 
   return (
     <article className="my-application-card">
-      <h2>{offerTitle}</h2>
-      <p className="my-application-card-meta">
-        Creador: {creatorFullName} · Fecha de envío: {formatDateRange(createdAt, createdAt)}
+      <div className="my-application-card-header">
+        <h2>{offerTitle}</h2>
+        <span
+          className={`my-application-card-status my-application-card-status--${statusInfo.color}`}
+        >
+          <span className="dot" aria-hidden="true" />
+          {statusInfo.label}
+        </span>
+      </div>
+      <p className="my-application-card-meta">Creador: {creatorFullName}</p>
+      <p className="my-application-card-date">
+        Fecha de envío: {formatRelativeDate(createdAt)}
       </p>
-
-      <span className={`my-application-card-status my-application-card-status--${statusInfo.color}`}>
-        {statusInfo.label}
-      </span>
 
       {isAccepted && (
         <div className="my-application-card-contact">
           <p>Contacto habilitado:</p>
-          <p>{creatorEmail}{creatorInstagramUrl && ` · @${creatorInstagramUrl}`}</p>
+          <p>
+            {creatorEmail}
+            {creatorInstagramUrl && ` · @${creatorInstagramUrl}`}
+          </p>
         </div>
       )}
 
-      <Link to={`/offers/${offerId}`} className="my-application-card-link">
-        Ver Oferta Original
-      </Link>
+      <div className="my-application-card-footer">
+        <Link to={`/offers/${offerId}`} className="my-application-card-link">
+          Ver Oferta Original
+        </Link>
+      </div>
     </article>
   );
-}
-
-MyApplicationCard.propTypes = {
-  application: PropTypes.object.isRequired,
 };
-
-export default MyApplicationCard;

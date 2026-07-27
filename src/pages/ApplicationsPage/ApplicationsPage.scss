@@ -1,0 +1,32 @@
+@use "../../styles/variables" as *;
+
+.applications-page {
+  padding: 24px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+    margin-bottom: 4px;
+  }
+}
+
+.applications-page-subtitle {
+  color: $text-muted;
+  font-size: $font-size-sm;
+  margin-bottom: 20px;
+}
+
+.applications-page-status,
+.applications-page-empty {
+  text-align: center;
+  color: $text-muted;
+  padding: 60px 0;
+}
+
+.applications-page-error {
+  color: $error-color;
+  margin-bottom: 16px;
+}

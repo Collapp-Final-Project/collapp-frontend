@@ -1,3 +1,6 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
 .my-application-card {
   background: $card-bg;
   border-radius: $radius-card;
@@ -5,40 +8,61 @@
   padding: 16px;
   margin-bottom: 16px;
 
-  h2 {
-    margin: 0 0 4px;
-    font-size: $font-size-lg;
-    font-weight: $font-weight-semibold;
-    color: $text-main;
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 4px;
+
+    h2 {
+      margin: 0;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $text-main;
+    }
   }
 
-  &-meta {
-    margin: 0 0 12px;
-    font-size: $font-size-xs;
-    color: $text-muted;
-  }
+ &-meta {
+  margin: 0 0 2px;
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+&-date {
+  margin: 0 0 12px;
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
 
   &-status {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: $radius-button;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: $font-size-xs;
     font-weight: $font-weight-medium;
-    margin-bottom: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
 
     &--blue {
-      background: rgba($color-azul-real, 0.1);
       color: $color-azul-real;
+      .dot { background-color: $color-azul-real; }
     }
 
     &--green {
-      background: rgba($success-color, 0.1);
       color: $success-color;
+      .dot { background-color: $success-color; }
     }
 
     &--red {
-      background: rgba($error-color, 0.1);
       color: $error-color;
+      .dot { background-color: $error-color; }
     }
   }
 
@@ -60,16 +84,25 @@
     }
   }
 
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   &-link {
-    display: inline-block;
-    color: $primary-color;
+    @include focus-ring;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: $color-ink;
+    color: $color-blanco;
     font-weight: $font-weight-semibold;
     font-size: $font-size-sm;
-    text-decoration: none;
-
-    &:focus-visible {
-      outline: $focus-ring-width solid $focus-ring-color;
-      outline-offset: 2px;
-    }
+    height: 40px;
+    padding: 0 20px;
+    border-radius: $radius-button;
+    white-space: nowrap;
   }
 }
