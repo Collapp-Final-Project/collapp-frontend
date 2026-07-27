@@ -34,4 +34,8 @@ export const offerService = {
   const response = await axiosClient.get("/offers/mine");
   return response.data;
 },
+  async listAll() {
+  const response = await axiosClient.get("/offers/all");
+  return response.data;
+},
 };

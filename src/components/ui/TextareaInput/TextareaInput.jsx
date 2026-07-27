@@ -7,10 +7,10 @@ export const TextareaInput = ({
   error,
   ...textareaProps
 }) => (
-  <div className="auth-input-group">
+  <div className="textarea-input-group">
     <label htmlFor={id}>{label}</label>
-    <div className={`auth-input-wrapper ${error ? "auth-input-error" : ""}`}>
-      {Icon && <Icon className="auth-input-icon" size={20} aria-hidden="true" />}
+    <div className={`textarea-input-wrapper ${error ? "textarea-input-error" : ""}`}>
+      {Icon && <Icon className="textarea-input-icon" size={20} aria-hidden="true" />}
       <textarea
         id={id}
         rows={3}
@@ -20,7 +20,7 @@ export const TextareaInput = ({
       />
     </div>
     {error && (
-      <span id={`${id}-error`} className="auth-error-message" role="alert">
+      <span id={`${id}-error`} className="textarea-error-message" role="alert">
         {error}
       </span>
     )}

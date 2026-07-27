@@ -19,22 +19,22 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setIsLoading(true);
-    try {
-      await login({ email, password });
-      navigate("/feed");
-    } catch (err) {
-      setError(
-        err.response?.status === 401
-          ? "Email o contraseña incorrectos"
-          : "Ocurrió un error inesperado. Inténtalo de nuevo."
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  e.preventDefault();
+  setError(null);
+  setIsLoading(true);
+  try {
+    const data = await login({ email, password });
+    navigate(data.role === "ROLE_ADMIN" ? "/admin" : "/feed");
+  } catch (err) {
+    setError(
+      err.response?.status === 401
+        ? "Email o contraseña incorrectos"
+        : "Ocurrió un error inesperado. Inténtalo de nuevo."
+    );
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <AuthCard
