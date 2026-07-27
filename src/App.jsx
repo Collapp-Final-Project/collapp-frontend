@@ -7,7 +7,9 @@ import { OfferDetailPage } from "./pages/OfferDetailPage/OfferDetailPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { ApplicationsPage } from "./pages/ApplicationsPage/ApplicationsPage";
 import { MyPublicationsPage } from "./pages/MyPublicationsPage/MyPublicationsPage";
+import { AdminPage } from "./pages/AdminPage/AdminPage";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
+import { AdminRoute } from "./routes/AdminRoute";
 import { MainLayout } from "./components/layout/MainLayout/MainLayout";
 import { OfferFormPage } from "./pages/OfferFormPage/OfferFormPage";
 import "./styles/main.scss";
@@ -31,6 +33,10 @@ function App() {
             </Route>
             <Route path="/offers/new" element={<OfferFormPage />} />
             <Route path="/offers/:id/edit" element={<OfferFormPage />} />
+
+            <Route element={<AdminRoute />}>
+              <Route path="/admin" element={<AdminPage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

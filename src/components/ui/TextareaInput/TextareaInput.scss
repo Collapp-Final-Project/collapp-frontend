@@ -1,7 +1,7 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-.auth-input-group {
+.textarea-input-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -13,7 +13,7 @@
   }
 }
 
-.auth-input-wrapper {
+.textarea-input-wrapper {
   display: flex;
   align-items: flex-start;
   background-color: $input-bg;
@@ -28,16 +28,16 @@
     box-shadow: 0 0 0 3px rgba($primary-color, 0.15);
   }
 
-  &.auth-input-error {
+  &.textarea-input-error {
     border-color: $error-color;
     background-color: rgba($error-color, 0.05);
 
-    .auth-input-icon {
+    .textarea-input-icon {
       color: $error-color;
     }
   }
 
-  .auth-input-icon {
+  .textarea-input-icon {
     color: $text-placeholder;
     margin-right: 12px;
     margin-top: 10px;
@@ -64,7 +64,7 @@
   }
 }
 
-.auth-error-message {
+.textarea-error-message {
   color: $error-color;
   font-size: $font-size-xs;
   margin-top: 4px;
