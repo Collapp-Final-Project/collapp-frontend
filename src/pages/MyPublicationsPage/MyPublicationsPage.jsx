@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import { offerService } from "../../services/offerService";
 import { applicationService } from "../../services/applicationService";
 import { OfferPublicationCard } from "../../components/common/offers/OfferPublicationCard/OfferPublicationCard";
@@ -97,7 +97,7 @@ export const MyPublicationsPage = () => {
 
       <Link to="/offers/new" className="my-publications-create">
         <span>Crear nueva oferta</span>
-        <Plus size={22} aria-hidden="true" />
+        <CirclePlus size={36} className="my-publications-create-icon" aria-hidden="true" />
       </Link>
 
       {offersWithApplications.length === 0 ? (

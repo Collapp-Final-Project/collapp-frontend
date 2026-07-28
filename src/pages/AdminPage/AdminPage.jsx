@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Shield, LogOut } from "lucide-react";
+import { X } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { offerService } from "../../services/offerService";
 import { AdminOfferCard } from "../../components/common/admin/AdminOfferCard/AdminOfferCard";
@@ -12,6 +13,14 @@ export const AdminPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [offerToDelete, setOfferToDelete] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -37,8 +46,10 @@ export const AdminPage = () => {
 
   const confirmDelete = async () => {
     try {
+      const title = offerToDelete.title;
       await offerService.remove(offerToDelete.id);
       setOffers((prev) => prev.filter((o) => o.id !== offerToDelete.id));
+      setSuccessMessage(`Oferta "${title}" eliminada correctamente.`);
     } catch {
       setError("No se pudo eliminar la oferta.");
     } finally {
@@ -56,6 +67,19 @@ export const AdminPage = () => {
       <div className="admin-page-content">
         <h1>Publicaciones</h1>
         <p className="admin-page-subtitle">Revisión de ofertas.</p>
+
+        {successMessage && (
+          <div className="admin-page-success" role="status">
+            <p>{successMessage}</p>
+            <button
+              type="button"
+              onClick={() => setSuccessMessage(null)}
+              aria-label="Cerrar mensaje"
+            >
+              <X size={16} aria-hidden="true" />
+            </button>
+          </div>
+        )}
 
         {error && (
           <p role="alert" className="admin-page-error">

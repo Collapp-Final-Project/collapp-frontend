@@ -88,7 +88,7 @@ export const OfferDetailPage = () => {
   const confirmDelete = async () => {
     try {
       await offerService.remove(offer.id);
-      navigate("/feed");
+      navigate("/feed", { state: { deleteSuccess: offer.title } });
     } catch {
       setError("No se pudo eliminar la oferta.");
       setIsDeleteDialogOpen(false);
