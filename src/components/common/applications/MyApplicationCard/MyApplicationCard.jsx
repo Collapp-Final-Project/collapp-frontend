@@ -36,10 +36,16 @@ export const MyApplicationCard = ({ application }) => {
       {isAccepted && (
         <div className="my-application-card-contact">
           <p>Contacto habilitado:</p>
-          <p>
-            {creatorEmail}
-            {creatorInstagramUrl && ` · @${creatorInstagramUrl}`}
-          </p>
+          <a href={`mailto:${creatorEmail}`}>{creatorEmail}</a>
+          {creatorInstagramUrl && (
+            <a
+              href={creatorInstagramUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {creatorInstagramUrl}
+            </a>
+          )}
         </div>
       )}
 
