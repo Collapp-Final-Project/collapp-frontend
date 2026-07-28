@@ -7,6 +7,7 @@
 
 .auth-card {
   @include auth-card;
+  position: relative;
 }
 
 .auth-header {

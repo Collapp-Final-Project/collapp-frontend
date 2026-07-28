@@ -152,6 +152,15 @@ export const RegisterPage = () => {
         </p>
       )}
 
+      <button
+        type="button"
+        className="register-close-button"
+        onClick={() => navigate("/login")}
+        aria-label="Cancelar registro"
+      >
+        ✕
+      </button>
+
       {currentStep === 1 ? (
         <form onSubmit={handleNextStep} className="register-form" noValidate>
           <FormInput
@@ -195,6 +204,13 @@ export const RegisterPage = () => {
             error={fieldErrors.specialty}
           />
           <SubmitButton isLoading={false}>Crear Mi Cuenta →</SubmitButton>
+          <button
+            type="button"
+            className="register-cancel-button"
+            onClick={() => navigate("/login")}
+          >
+            Cancelar
+          </button>
         </form>
       ) : (
         <form onSubmit={handleSubmit} className="register-form" noValidate>
