@@ -185,7 +185,7 @@ export const OfferDetailPage = () => {
       <div className="offer-detail-publisher">
         <span className="offer-detail-publisher-label">Publicado por</span>
         <div className="offer-detail-publisher-info">
-          <AvatarPreview src={null} />
+          <AvatarPreview src={offer.creatorAvatarUrl || null} />
           <span className="offer-detail-publisher-name">
             {offer.creatorUsername}
           </span>
