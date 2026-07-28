@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { PlayCircle, PauseCircle, Ban } from "lucide-react";
 import { offerService } from "../../services/offerService";
+import { useAuth } from "../../hooks/useAuth";
 import { FormInput } from "../../components/ui/FormInput/FormInput";
 import { SubmitButton } from "../../components/ui/SubmitButton/SubmitButton";
 import { SpecialtySelector } from "../../components/common/auth/SpecialtySelector/SpecialtySelector";
@@ -46,6 +47,7 @@ export const OfferFormPage = () => {
   const { id } = useParams();
   const isEditMode = Boolean(id);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [fieldErrors, setFieldErrors] = useState({});
@@ -59,6 +61,10 @@ export const OfferFormPage = () => {
     const fetchOffer = async () => {
       try {
         const offer = await offerService.getById(id);
+        if (offer.creatorUsername !== user?.username) {
+          navigate("/feed");
+          return;
+        }
         const { description, requirements } = parseDescriptionAndRequirements(offer.description);
 
         setFormData({
@@ -80,7 +86,7 @@ export const OfferFormPage = () => {
     };
 
     fetchOffer();
-  }, [id, isEditMode]);
+  }, [id, isEditMode, navigate, user?.username]);
 
   const updateField = (field) => (e) => {
     const value = typeof e === "string" ? e : e.target.value;
@@ -146,7 +152,7 @@ export const OfferFormPage = () => {
   return (
     <div className="offer-form-page">
       <div className="offer-form-header">
-        <h1>{isEditMode ? "Editar Oferta" : "Crear Oferta"}</h1>
+        <h1>{isEditMode ? "Editar oferta" : "Crear Oferta"}</h1>
         <button
           type="button"
           className="offer-form-close"

@@ -19,7 +19,7 @@ export const ApplicationsPage = () => {
         if (!isCancelled) setApplications(data);
       } catch {
         if (!isCancelled) {
-          setError("No se pudieron cargar tus postulaciones.");
+          setError("No se pudieron cargar tus inscripciones.");
         }
       } finally {
         if (!isCancelled) setIsLoading(false);
@@ -35,7 +35,7 @@ export const ApplicationsPage = () => {
   if (isLoading) {
     return (
       <p role="status" aria-live="polite" className="applications-page-status">
-        Cargando tus postulaciones...
+        Cargando tus inscripciones...
       </p>
     );
   }
@@ -55,7 +55,7 @@ export const ApplicationsPage = () => {
 
       {applications.length === 0 ? (
         <p className="applications-page-empty">
-          Todavía no te has postulado a ningún proyecto.
+          Todavía no te has inscrito a ningún proyecto.
         </p>
       ) : (
         applications.map((application) => (

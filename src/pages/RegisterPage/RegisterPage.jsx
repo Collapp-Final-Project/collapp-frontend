@@ -137,7 +137,7 @@ export const RegisterPage = () => {
       footer={
         <AuthFooter
           prompt="¿Ya tienes cuenta?"
-          linkText="Iniciar Sesión"
+          linkText="Iniciar sesión"
           to="/login"
         />
       }
@@ -203,7 +203,7 @@ export const RegisterPage = () => {
             onChange={updateField("specialty")}
             error={fieldErrors.specialty}
           />
-          <SubmitButton isLoading={false}>Crear Mi Cuenta →</SubmitButton>
+          <SubmitButton isLoading={false}>Crear mi cuenta →</SubmitButton>
           <button
             type="button"
             className="register-cancel-button"

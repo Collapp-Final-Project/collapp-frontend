@@ -116,7 +116,7 @@ export const ProfilePage = () => {
                 setEditingBio(true);
               }}
             >
-              <Pencil size={14} aria-hidden="true" /> Editar
+              <Pencil size={14} aria-hidden="true" /> Editar biografía
             </button>
           </>
         )}

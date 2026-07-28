@@ -51,7 +51,7 @@ export const MyApplicationCard = ({ application }) => {
 
       <div className="my-application-card-footer">
         <Link to={`/offers/${offerId}`} className="my-application-card-link">
-          Ver Oferta Original
+          Ver oferta original
         </Link>
       </div>
     </article>

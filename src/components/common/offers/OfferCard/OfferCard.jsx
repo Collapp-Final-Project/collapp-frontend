@@ -51,7 +51,7 @@ export const OfferCard = ({ offer }) => {
 
       <div className="offer-card-footer">
         <Link to={`/offers/${id}`} className="offer-card-link">
-          Ver Detalles
+          Ver detalles
         </Link>
       </div>
     </article>

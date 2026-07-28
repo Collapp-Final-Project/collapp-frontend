@@ -35,7 +35,7 @@ export const OfferPublicationCard = ({ offer, applications, onAccept, onReject }
         </button>
 
         <Link to={`/offers/${offer.id}`} className="offer-publication-card-details">
-          Ver Detalles
+          Ver detalles
         </Link>
       </div>
 

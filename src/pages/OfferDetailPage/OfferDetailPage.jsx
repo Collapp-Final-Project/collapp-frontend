@@ -74,11 +74,11 @@ export const OfferDetailPage = () => {
       setHasApplied(true);
     } catch (err) {
       if (err.response?.status === 409) {
-        setApplicationError("Ya te has postulado a esta oferta.");
+        setApplicationError("Ya te has inscrito a esta oferta.");
       } else if (err.response?.status === 400) {
-        setApplicationError("No puedes postularte a tu propia oferta.");
+        setApplicationError("No puedes inscribirte a tu propia oferta.");
       } else {
-        setApplicationError("Ha ocurrido un error al enviar tu postulación.");
+        setApplicationError("Ha ocurrido un error al enviar tu inscripción.");
       }
     } finally {
       setIsSubmittingApplication(false);
@@ -156,7 +156,7 @@ export const OfferDetailPage = () => {
               to={`/offers/${offer.id}/edit`}
               className="offer-detail-edit-button"
             >
-              Editar Oferta
+              Editar oferta
             </Link>
             <button
               type="button"

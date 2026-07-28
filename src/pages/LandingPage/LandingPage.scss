@@ -1,0 +1,91 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.landing-page {
+  @include flex-center-container;
+  padding: 48px 24px;
+}
+
+.landing-page-brand {
+  max-width: 380px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-page-title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $text-main;
+  margin-bottom: 8px;
+}
+
+.landing-page-heading {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-main;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.landing-page-tagline {
+  color: $text-muted;
+  font-size: $font-size-sm;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.landing-page-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.landing-page-cta-primary {
+  @include focus-ring;
+
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-color;
+  color: $color-blanco;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}
+
+.landing-page-cta-secondary {
+  @include focus-ring;
+
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-ink;
+  color: $color-blanco;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.landing-page-explore {
+  @include focus-ring;
+
+  display: inline-block;
+  color: $color-ink;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-decoration: underline;
+}

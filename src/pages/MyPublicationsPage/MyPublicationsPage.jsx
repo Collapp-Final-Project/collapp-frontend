@@ -64,7 +64,7 @@ export const MyPublicationsPage = () => {
         })
       );
     } catch {
-      setError("No se pudo actualizar la postulación.");
+      setError("No se pudo actualizar la inscripción.");
     }
   };
 

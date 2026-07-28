@@ -105,7 +105,7 @@ export const AdminPage = () => {
 
         <button className="admin-page-logout" onClick={logout}>
           <LogOut size={18} aria-hidden="true" />
-          Cerrar Sesión
+          Cerrar sesión
         </button>
       </div>
 
