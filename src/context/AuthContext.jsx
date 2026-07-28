@@ -2,7 +2,6 @@ import { createContext, useState } from "react";
 import { authService } from "../services/authService";
 import { STORAGE_KEYS } from "../utils/constants";
 
-
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -19,33 +18,28 @@ export const AuthProvider = ({ children }) => {
   });
 
   const [token, setToken] = useState(() => {
-    const savedToken = localStorage.getItem(STORAGE_KEYS.TOKEN);
-    const savedUser = localStorage.getItem(STORAGE_KEYS.USER);
-    if (!savedToken || !savedUser) return null;
-    return savedToken;
+    return localStorage.getItem(STORAGE_KEYS.TOKEN);
   });
+
+  const persistSession = (data) => {
+    const { token, ...userInfo } = data;
+
+    setToken(token);
+    setUser(userInfo);
+
+    localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userInfo));
+  };
 
   const login = async (credentials) => {
     const data = await authService.login(credentials);
-
-    setToken(data.token);
-    setUser(data);
-
-    localStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data));
-
+    persistSession(data);
     return data;
   };
 
   const register = async (registerData) => {
     const data = await authService.register(registerData);
-
-    setToken(data.token);
-    setUser(data);
-
-    localStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
-    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(data));
-
+    persistSession(data);
     return data;
   };
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { LogOut, Link, Link2, AlignLeft, Check, X, Pencil } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
+import { LogOut, AtSign, Link2, AlignLeft, Check, X, Pencil } from "lucide-react";import { useAuth } from "../../hooks/useAuth";
 import { userService } from "../../services/userService";
 import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
 import { TextareaInput } from "../../components/ui/TextareaInput/TextareaInput";
@@ -130,7 +129,7 @@ export const ProfilePage = () => {
               rel="noreferrer"
               className="profile-page-link"
             >
-              <Instagram size={16} aria-hidden="true" /> Redes
+              <AtSign size={16} aria-hidden="true" /> Redes
             </a>
           )}
           {profile.portfolioUrl && (
