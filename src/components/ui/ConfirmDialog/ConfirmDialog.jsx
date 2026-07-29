@@ -45,9 +45,7 @@ export const ConfirmDialog = ({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onCancel]);
 
-  if (!isOpen) return null;
-
-  return (
+  return !isOpen ? null : (
     <div className="confirm-dialog-overlay" onClick={onCancel}>
       <div
         ref={dialogRef}

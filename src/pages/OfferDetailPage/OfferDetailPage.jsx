@@ -95,27 +95,63 @@ export const OfferDetailPage = () => {
     }
   };
 
+  const isOwner = offer ? user?.username === offer.creatorUsername : false;
+  const CompensationIcon = offer ? COMPENSATION_ICON[offer.compensationType] : null;
+
+  let applySection;
+  if (isOwner) {
+    applySection = (
+      <div className="offer-detail-owner-actions">
+        <Link
+          to={`/offers/${offer.id}/edit`}
+          className="offer-detail-edit-button"
+        >
+          Editar oferta
+        </Link>
+        <button
+          type="button"
+          className="offer-detail-delete-button"
+          onClick={() => setIsDeleteDialogOpen(true)}
+        >
+          Eliminar Oferta
+        </button>
+      </div>
+    );
+  } else if (hasApplied) {
+    applySection = (
+      <p className="offer-detail-applied-message" role="status">
+        ¡Te has inscrito correctamente en este proyecto!
+      </p>
+    );
+  } else {
+    applySection = (
+      <div className="offer-detail-apply-section">
+        {applicationError && (
+          <p className="offer-detail-apply-error" role="alert">
+            {applicationError}
+          </p>
+        )}
+        <OfferApplicationBox onSubmit={handleApply} isSubmitting={isSubmittingApplication} />
+      </div>
+    );
+  }
+
+  let content;
   if (isLoading) {
-    return (
+    content = (
       <p role="status" aria-live="polite" className="offer-detail-status">
         Cargando oferta...
       </p>
     );
-  }
-
-  if (error || !offer) {
-    return (
+  } else if (error || !offer) {
+    content = (
       <p role="alert" className="offer-detail-status offer-detail-error">
         {error || "Oferta no encontrada."}
       </p>
     );
-  }
-
-  const isOwner = user?.username === offer.creatorUsername;
-  const CompensationIcon = COMPENSATION_ICON[offer.compensationType];
-
-  return (
-    <div className="offer-detail-page">
+  } else {
+    content = (
+      <div className="offer-detail-page">
       <button className="offer-detail-back" onClick={() => navigate("/feed")}>
         <ArrowLeft size={18} aria-hidden="true" /> Volver al tablón
       </button>
@@ -150,36 +186,7 @@ export const OfferDetailPage = () => {
           <p className="offer-detail-description">{offer.description}</p>
         </section>
 
-        {isOwner ? (
-          <div className="offer-detail-owner-actions">
-            <Link
-              to={`/offers/${offer.id}/edit`}
-              className="offer-detail-edit-button"
-            >
-              Editar oferta
-            </Link>
-            <button
-              type="button"
-              className="offer-detail-delete-button"
-              onClick={() => setIsDeleteDialogOpen(true)}
-            >
-              Eliminar Oferta
-            </button>
-          </div>
-       ) : hasApplied ? (
-          <p className="offer-detail-applied-message" role="status">
-            ¡Te has inscrito correctamente en este proyecto!
-          </p>
-        ) : (
-          <div className="offer-detail-apply-section">
-            {applicationError && (
-              <p className="offer-detail-apply-error" role="alert">
-                {applicationError}
-              </p>
-            )}
-            <OfferApplicationBox onSubmit={handleApply} isSubmitting={isSubmittingApplication} />
-          </div>
-        )}
+        {applySection}
       </div>
 
       <div className="offer-detail-publisher">
@@ -202,5 +209,8 @@ export const OfferDetailPage = () => {
         onCancel={() => setIsDeleteDialogOpen(false)}
       />
     </div>
-  );
+    );
+  }
+
+  return content;
 };

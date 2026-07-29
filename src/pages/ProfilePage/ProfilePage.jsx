@@ -39,24 +39,22 @@ export const ProfilePage = () => {
     };
   }, []);
 
+  let content;
   if (isLoading) {
-    return (
+    content = (
       <p role="status" aria-live="polite" className="profile-page-status">
         Cargando perfil...
       </p>
     );
-  }
-
-  if (error || !profile) {
-    return (
+  } else if (error || !profile) {
+    content = (
       <p role="alert" className="profile-page-status profile-page-error">
         {error || "No se pudo cargar el perfil."}
       </p>
     );
-  }
-
-  return (
-    <div className="profile-page">
+  } else {
+    content = (
+      <div className="profile-page">
       <div className="profile-page-header">
         <h1>Mi Perfil</h1>
         <p className="profile-page-subtitle">
@@ -169,5 +167,8 @@ export const ProfilePage = () => {
         Cerrar sesión
       </button>
     </div>
-  );
+    );
+  }
+
+  return content;
 };

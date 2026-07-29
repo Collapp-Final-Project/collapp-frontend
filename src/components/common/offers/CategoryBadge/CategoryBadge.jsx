@@ -3,11 +3,10 @@ import "./CategoryBadge.scss";
 
 export const CategoryBadge = ({ category }) => {
   const config = CATEGORY_CONFIG[category];
-  if (!config) return null;
 
-  return (
+  return config ? (
     <span className={`category-badge ${config.className}`}>
       {config.label}
     </span>
-  );
+  ) : null;
 };

@@ -32,15 +32,11 @@ export const ApplicationsPage = () => {
     };
   }, []);
 
-  if (isLoading) {
-    return (
-      <p role="status" aria-live="polite" className="applications-page-status">
-        Cargando tus inscripciones...
-      </p>
-    );
-  }
-
-  return (
+  return isLoading ? (
+    <p role="status" aria-live="polite" className="applications-page-status">
+      Cargando tus inscripciones...
+    </p>
+  ) : (
     <div className="applications-page">
       <h1>Mis Postulaciones</h1>
       <p className="applications-page-subtitle">

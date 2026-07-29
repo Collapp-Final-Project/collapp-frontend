@@ -141,15 +141,11 @@ export const OfferFormPage = () => {
     }
   };
 
-  if (isFetching) {
-    return (
-      <p role="status" aria-live="polite" className="offer-form-status">
-        Cargando oferta...
-      </p>
-    );
-  }
-
-  return (
+  return isFetching ? (
+    <p role="status" aria-live="polite" className="offer-form-status">
+      Cargando oferta...
+    </p>
+  ) : (
     <div className="offer-form-page">
       <div className="offer-form-header">
         <h1>{isEditMode ? "Editar oferta" : "Crear Oferta"}</h1>

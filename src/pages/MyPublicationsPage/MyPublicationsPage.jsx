@@ -74,15 +74,11 @@ export const MyPublicationsPage = () => {
   const handleReject = (applicationId) =>
     handleApplicationStatusChange(applicationId, "REJECTED");
 
-  if (isLoading) {
-    return (
-      <p role="status" aria-live="polite" className="my-publications-status">
-        Cargando tus publicaciones...
-      </p>
-    );
-  }
-
-  return (
+  return isLoading ? (
+    <p role="status" aria-live="polite" className="my-publications-status">
+      Cargando tus publicaciones...
+    </p>
+  ) : (
     <div className="my-publications-page">
       <h1>Mis Publicaciones</h1>
       <p className="my-publications-subtitle">
