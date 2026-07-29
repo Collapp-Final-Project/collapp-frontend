@@ -40,7 +40,7 @@ export const LoginPage = () => {
     <AuthCard
       title="Collapp"
       subtitle="Únete a la comunidad creativa."
-      footer={<AuthFooter prompt="¿No tienes cuenta?" linkText="Crear Cuenta" to="/register" />}
+      footer={<AuthFooter prompt="¿No tienes cuenta?" linkText="Crear cuenta" to="/register" />}
     >
       <form onSubmit={handleSubmit} className="login-form">
         <FormInput

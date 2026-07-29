@@ -24,18 +24,21 @@ $specialty-photo: $color-verde-lima;   // Fotografía & Video
 $specialty-model: $color-naranja-coral; // Modelo / Talento
 $specialty-prod: $color-azul-real;     // Producción
 
-// --- UI Base ---
+// --- Tipografía ---
+$font-base: 'Inter', system-ui, -apple-system, sans-serif;
+
+// --- UI Base ---  
+$font-logo: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
 $text-main: $color-antracita;
 $text-muted: #666666;
 $text-placeholder: #767676;
 $card-bg: $color-blanco;
 $input-bg: #F8F9FA;
 $border-color: #E2E8F0;
-$error-color: #D32F2F;
-$success-color: #2E7D32;
+$error-color: #C62828;
+$success-color: #1B5E20;
 
 // --- Tipografía ---
-$font-base: 'Inter', system-ui, -apple-system, sans-serif;
 $font-size-xs: 0.75rem;    // 12px
 $font-size-sm: 0.875rem;   // 14px
 $font-size-md: 1rem;       // 16px

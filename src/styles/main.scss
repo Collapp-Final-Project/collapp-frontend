@@ -1,5 +1,5 @@
-@use 'variables' as *;
-@use 'mixins' as *;
+@use "variables" as *;
+@use "mixins" as *;
 
 * {
   box-sizing: border-box;
@@ -8,6 +8,19 @@
 }
 
 body {
+  background:
+    radial-gradient(
+      ellipse at top left,
+      rgba($bg-gradient-start, 0.4),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      rgba($bg-gradient-end, 0.5),
+      transparent 50%
+    ),
+    $bg-page;
+  background-attachment: fixed;
   font-family: $font-base;
   color: $text-main;
   background-color: $bg-page;
@@ -44,9 +57,10 @@ a {
   border: 0;
 }
 
-
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

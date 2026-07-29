@@ -1,0 +1,121 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 48px 24px;
+  background: linear-gradient(135deg, $bg-gradient-start, $bg-gradient-end);
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+  }
+}
+
+.landing-page-brand {
+  max-width: 380px;
+  text-align: center;
+
+  @media (min-width: 900px) {
+    text-align: left;
+  }
+}
+
+.landing-page-logo {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $color-ink;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.landing-page-brand h1 {
+  font-size: 2.25rem;
+  font-weight: $font-weight-bold;
+  color: $color-ink;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.landing-page-tagline {
+  color: $text-main;
+  font-size: $font-size-md;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  margin-top: 10px;
+}
+
+.landing-page-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.landing-page-cta-primary {
+  @include focus-ring;
+
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-color;
+  color: $color-blanco;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $primary-hover;
+  }
+}
+
+.landing-page-cta-secondary {
+  @include focus-ring;
+
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-ink;
+  color: $color-blanco;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+  text-decoration: none;
+}
+
+.landing-page-explore {
+  @include focus-ring;
+
+  display: inline-block;
+  color: $color-ink;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-decoration: underline;
+}
+
+
+
+.landing-page-cards {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+
+  .offer-card {
+    padding: 16px 20px;
+  }
+
+  .offer-card-footer {
+    display: none;
+  }
+}

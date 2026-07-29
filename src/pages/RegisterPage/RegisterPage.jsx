@@ -137,7 +137,7 @@ export const RegisterPage = () => {
       footer={
         <AuthFooter
           prompt="¿Ya tienes cuenta?"
-          linkText="Iniciar Sesión"
+          linkText="Iniciar sesión"
           to="/login"
         />
       }
@@ -151,6 +151,15 @@ export const RegisterPage = () => {
           {generalError}
         </p>
       )}
+
+      <button
+        type="button"
+        className="register-close-button"
+        onClick={() => navigate("/login")}
+        aria-label="Cancelar registro"
+      >
+        ✕
+      </button>
 
       {currentStep === 1 ? (
         <form onSubmit={handleNextStep} className="register-form" noValidate>
@@ -194,7 +203,14 @@ export const RegisterPage = () => {
             onChange={updateField("specialty")}
             error={fieldErrors.specialty}
           />
-          <SubmitButton isLoading={false}>Crear Mi Cuenta →</SubmitButton>
+          <SubmitButton isLoading={false}>Crear mi cuenta →</SubmitButton>
+          <button
+            type="button"
+            className="register-cancel-button"
+            onClick={() => navigate("/login")}
+          >
+            Cancelar
+          </button>
         </form>
       ) : (
         <form onSubmit={handleSubmit} className="register-form" noValidate>

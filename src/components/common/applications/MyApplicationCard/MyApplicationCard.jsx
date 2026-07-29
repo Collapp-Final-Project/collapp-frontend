@@ -30,22 +30,24 @@ export const MyApplicationCard = ({ application }) => {
       </div>
       <p className="my-application-card-meta">Creador: {creatorFullName}</p>
       <p className="my-application-card-date">
-        Fecha de envío: {formatRelativeDate(createdAt)}
+        Fecha de inscripción: {formatRelativeDate(createdAt)}
       </p>
 
       {isAccepted && (
         <div className="my-application-card-contact">
           <p>Contacto habilitado:</p>
-          <p>
-            {creatorEmail}
-            {creatorInstagramUrl && ` · @${creatorInstagramUrl}`}
-          </p>
+          <a href={`mailto:${creatorEmail}`}>{creatorEmail}</a>
+          {creatorInstagramUrl && (
+            <a href={creatorInstagramUrl} target="_blank" rel="noreferrer">
+              {creatorInstagramUrl}
+            </a>
+          )}
         </div>
       )}
 
       <div className="my-application-card-footer">
         <Link to={`/offers/${offerId}`} className="my-application-card-link">
-          Ver Oferta Original
+          Ver oferta original
         </Link>
       </div>
     </article>

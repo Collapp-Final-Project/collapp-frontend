@@ -4,13 +4,12 @@ import { useAuth } from "../hooks/useAuth";
 export const AdminRoute = () => {
   const { isAuthenticated, user } = useAuth();
 
+  let redirectTo = null;
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    redirectTo = "/login";
+  } else if (user?.role !== "ROLE_ADMIN") {
+    redirectTo = "/feed";
   }
 
-  if (user?.role !== "ROLE_ADMIN") {
-    return <Navigate to="/feed" replace />;
-  }
-
-  return <Outlet />;
+  return redirectTo ? <Navigate to={redirectTo} replace /> : <Outlet />;
 };

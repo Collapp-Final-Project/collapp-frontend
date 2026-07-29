@@ -14,7 +14,7 @@ export const CATEGORIES = [
   { value: null, label: "Todos" },
   { value: "PHOTOGRAPHY_VIDEO", label: "Foto/Vídeo" },
   { value: "PRODUCTION", label: "Producción" },
-  { value: "MAKEUP", label: "Makeup" },
+  { value: "MAKEUP", label: "Maquillaje" },
   { value: "MODEL_TALENT", label: "Modelo/Talento" },
 ];
 
@@ -36,6 +36,6 @@ export const STATUS_OPTIONS = Object.entries(STATUS_CONFIG).map(([value, { label
 
 export const APPLICATION_STATUS_CONFIG = {
   PENDING: { label: "Pendiente de revisión", color: "blue" },
-  ACCEPTED: { label: "Postulación aceptada", color: "green" },
-  REJECTED: { label: "Postulación rechazada", color: "red" },
+  ACCEPTED: { label: "Inscripción aceptada", color: "green" },
+  REJECTED: { label: "Inscripción rechazada", color: "red" },
 };

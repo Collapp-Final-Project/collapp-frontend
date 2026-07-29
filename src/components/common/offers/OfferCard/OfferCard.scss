@@ -6,10 +6,16 @@
   border-radius: $radius-card;
   padding: 20px;
   box-shadow: $shadow-card;
-  border-left: 8px solid $border-color; // fallback si no hay categoría reconocida
+  border-left: 8px solid $border-color;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1);
+  }
 
   &.specialty-sfx { border-left-color: $specialty-sfx; }
   &.specialty-photo { border-left-color: $specialty-photo; }

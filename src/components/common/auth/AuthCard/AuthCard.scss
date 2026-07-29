@@ -7,6 +7,7 @@
 
 .auth-card {
   @include auth-card;
+  position: relative;
 }
 
 .auth-header {
@@ -14,6 +15,8 @@
   margin-bottom: 32px;
 
   h1 {
+    font-family: $font-logo;
+    letter-spacing: -0.04em;
     font-size: $font-size-3xl;
     font-weight: $font-weight-bold;
     color: $text-main;

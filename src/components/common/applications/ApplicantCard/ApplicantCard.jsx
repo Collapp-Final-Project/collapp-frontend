@@ -1,4 +1,3 @@
-import { CheckCircle, XCircle } from "lucide-react";
 import { AvatarPreview } from "../../../ui/AvatarPreview/AvatarPreview";
 import { CATEGORY_CONFIG } from "../../../../utils/constants";
 import "./ApplicantCard.scss";
@@ -31,13 +30,13 @@ export const ApplicantCard = ({ application, onAccept, onReject }) => {
             onClick={() => onAccept(application.id)}
             aria-label={`Aceptar a ${applicantFullName}`}
           >
-            <CheckCircle size={18} aria-hidden="true" /> Aceptar
+            Aceptar
           </button>
           <button
             onClick={() => onReject(application.id)}
             aria-label={`Rechazar a ${applicantFullName}`}
           >
-            <XCircle size={18} aria-hidden="true" /> Rechazar
+            Rechazar
           </button>
         </div>
       ) : (

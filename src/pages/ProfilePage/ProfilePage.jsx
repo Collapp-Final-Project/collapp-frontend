@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { LogOut, Link, Link2, AlignLeft, Check, X, Pencil } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
+import { LogOut, AtSign, Link2, AlignLeft, Check, X, Pencil, Image as ImageIcon } from "lucide-react";import { useAuth } from "../../hooks/useAuth";
 import { userService } from "../../services/userService";
 import { AvatarPreview } from "../../components/ui/AvatarPreview/AvatarPreview";
 import { TextareaInput } from "../../components/ui/TextareaInput/TextareaInput";
+import { FormInput } from "../../components/ui/FormInput/FormInput";
 import { CategoryBadge } from "../../components/common/offers/CategoryBadge/CategoryBadge";
 import "./ProfilePage.scss";
 
@@ -12,9 +12,10 @@ export const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [editingBio, setEditingBio] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [bioDraft, setBioDraft] = useState("");
-  const [savingBio, setSavingBio] = useState(false);
+  const [avatarUrlDraft, setAvatarUrlDraft] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     let isCancelled = false;
@@ -38,24 +39,29 @@ export const ProfilePage = () => {
     };
   }, []);
 
+  let content;
   if (isLoading) {
-    return (
+    content = (
       <p role="status" aria-live="polite" className="profile-page-status">
         Cargando perfil...
       </p>
     );
-  }
-
-  if (error || !profile) {
-    return (
+  } else if (error || !profile) {
+    content = (
       <p role="alert" className="profile-page-status profile-page-error">
         {error || "No se pudo cargar el perfil."}
       </p>
     );
-  }
+  } else {
+    content = (
+      <div className="profile-page">
+      <div className="profile-page-header">
+        <h1>Mi Perfil</h1>
+        <p className="profile-page-subtitle">
+          Gestiona tu información personal y biografía
+        </p>
+      </div>
 
-  return (
-    <div className="profile-page">
       <div className="profile-page-card">
         <div className="profile-page-cover" />
 
@@ -66,8 +72,17 @@ export const ProfilePage = () => {
         <h1>{profile.fullName}</h1>
         <CategoryBadge category={profile.specialty} />
 
-        {editingBio ? (
+        {isEditing ? (
           <div className="profile-page-bio-edit">
+            <FormInput
+              id="avatarUrl"
+              type="url"
+              label="URL de tu foto"
+              icon={ImageIcon}
+              placeholder="https://..."
+              value={avatarUrlDraft}
+              onChange={(e) => setAvatarUrlDraft(e.target.value)}
+            />
             <TextareaInput
               id="bio"
               label="Biografía"
@@ -79,26 +94,26 @@ export const ProfilePage = () => {
             <div className="profile-page-bio-actions">
               <button
                 type="button"
-                onClick={() => setEditingBio(false)}
+                onClick={() => setIsEditing(false)}
               >
                 <X size={16} aria-hidden="true" /> Cancelar
               </button>
               <button
                 type="button"
-                disabled={savingBio}
+                disabled={isSaving}
                 onClick={async () => {
-                  setSavingBio(true);
+                  setIsSaving(true);
                   try {
-                    const updated = await userService.updateMe({ bio: bioDraft });
+                    const updated = await userService.updateMe({ bio: bioDraft, avatarUrl: avatarUrlDraft });
                     setProfile(updated);
-                    setEditingBio(false);
+                    setIsEditing(false);
                   } finally {
-                    setSavingBio(false);
+                    setIsSaving(false);
                   }
                 }}
               >
                 <Check size={16} aria-hidden="true" />
-                {savingBio ? "Guardando..." : "Guardar"}
+                {isSaving ? "Guardando..." : "Guardar"}
               </button>
             </div>
           </div>
@@ -114,7 +129,8 @@ export const ProfilePage = () => {
               className="profile-page-bio-edit-button"
               onClick={() => {
                 setBioDraft(profile.bio || "");
-                setEditingBio(true);
+                setAvatarUrlDraft(profile.avatarUrl || "");
+                setIsEditing(true);
               }}
             >
               <Pencil size={14} aria-hidden="true" /> Editar
@@ -130,7 +146,7 @@ export const ProfilePage = () => {
               rel="noreferrer"
               className="profile-page-link"
             >
-              <Instagram size={16} aria-hidden="true" /> Redes
+              <AtSign size={16} aria-hidden="true" /> Redes
             </a>
           )}
           {profile.portfolioUrl && (
@@ -151,5 +167,8 @@ export const ProfilePage = () => {
         Cerrar sesión
       </button>
     </div>
-  );
+    );
+  }
+
+  return content;
 };

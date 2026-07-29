@@ -76,10 +76,26 @@
       margin: 0;
       font-size: $font-size-sm;
       color: $text-main;
+      font-weight: $font-weight-semibold;
+      margin-bottom: 6px;
+    }
 
-      &:first-child {
-        font-weight: $font-weight-semibold;
+    a {
+      @include focus-ring;
+
+      display: block;
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $primary-color;
+      text-decoration: none;
+      word-break: break-all;
+
+      &:not(:last-child) {
         margin-bottom: 4px;
+      }
+
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

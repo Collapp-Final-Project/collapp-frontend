@@ -74,11 +74,11 @@ export const OfferDetailPage = () => {
       setHasApplied(true);
     } catch (err) {
       if (err.response?.status === 409) {
-        setApplicationError("Ya te has postulado a esta oferta.");
+        setApplicationError("Ya te has inscrito a esta oferta.");
       } else if (err.response?.status === 400) {
-        setApplicationError("No puedes postularte a tu propia oferta.");
+        setApplicationError("No puedes inscribirte a tu propia oferta.");
       } else {
-        setApplicationError("Ha ocurrido un error al enviar tu postulación.");
+        setApplicationError("Ha ocurrido un error al enviar tu inscripción.");
       }
     } finally {
       setIsSubmittingApplication(false);
@@ -88,34 +88,70 @@ export const OfferDetailPage = () => {
   const confirmDelete = async () => {
     try {
       await offerService.remove(offer.id);
-      navigate("/feed");
+      navigate("/feed", { state: { deleteSuccess: offer.title } });
     } catch {
       setError("No se pudo eliminar la oferta.");
       setIsDeleteDialogOpen(false);
     }
   };
 
+  const isOwner = offer ? user?.username === offer.creatorUsername : false;
+  const CompensationIcon = offer ? COMPENSATION_ICON[offer.compensationType] : null;
+
+  let applySection;
+  if (isOwner) {
+    applySection = (
+      <div className="offer-detail-owner-actions">
+        <Link
+          to={`/offers/${offer.id}/edit`}
+          className="offer-detail-edit-button"
+        >
+          Editar oferta
+        </Link>
+        <button
+          type="button"
+          className="offer-detail-delete-button"
+          onClick={() => setIsDeleteDialogOpen(true)}
+        >
+          Eliminar Oferta
+        </button>
+      </div>
+    );
+  } else if (hasApplied) {
+    applySection = (
+      <p className="offer-detail-applied-message" role="status">
+        ¡Te has inscrito correctamente en este proyecto!
+      </p>
+    );
+  } else {
+    applySection = (
+      <div className="offer-detail-apply-section">
+        {applicationError && (
+          <p className="offer-detail-apply-error" role="alert">
+            {applicationError}
+          </p>
+        )}
+        <OfferApplicationBox onSubmit={handleApply} isSubmitting={isSubmittingApplication} />
+      </div>
+    );
+  }
+
+  let content;
   if (isLoading) {
-    return (
+    content = (
       <p role="status" aria-live="polite" className="offer-detail-status">
         Cargando oferta...
       </p>
     );
-  }
-
-  if (error || !offer) {
-    return (
+  } else if (error || !offer) {
+    content = (
       <p role="alert" className="offer-detail-status offer-detail-error">
         {error || "Oferta no encontrada."}
       </p>
     );
-  }
-
-  const isOwner = user?.username === offer.creatorUsername;
-  const CompensationIcon = COMPENSATION_ICON[offer.compensationType];
-
-  return (
-    <div className="offer-detail-page">
+  } else {
+    content = (
+      <div className="offer-detail-page">
       <button className="offer-detail-back" onClick={() => navigate("/feed")}>
         <ArrowLeft size={18} aria-hidden="true" /> Volver al tablón
       </button>
@@ -150,42 +186,13 @@ export const OfferDetailPage = () => {
           <p className="offer-detail-description">{offer.description}</p>
         </section>
 
-        {isOwner ? (
-          <div className="offer-detail-owner-actions">
-            <Link
-              to={`/offers/${offer.id}/edit`}
-              className="offer-detail-edit-button"
-            >
-              Editar Oferta
-            </Link>
-            <button
-              type="button"
-              className="offer-detail-delete-button"
-              onClick={() => setIsDeleteDialogOpen(true)}
-            >
-              Eliminar Oferta
-            </button>
-          </div>
-       ) : hasApplied ? (
-          <p className="offer-detail-applied-message" role="status">
-            ¡Te has inscrito correctamente en este proyecto!
-          </p>
-        ) : (
-          <div className="offer-detail-apply-section">
-            {applicationError && (
-              <p className="offer-detail-apply-error" role="alert">
-                {applicationError}
-              </p>
-            )}
-            <OfferApplicationBox onSubmit={handleApply} isSubmitting={isSubmittingApplication} />
-          </div>
-        )}
+        {applySection}
       </div>
 
       <div className="offer-detail-publisher">
         <span className="offer-detail-publisher-label">Publicado por</span>
         <div className="offer-detail-publisher-info">
-          <AvatarPreview src={null} />
+          <AvatarPreview src={offer.creatorAvatarUrl || null} />
           <span className="offer-detail-publisher-name">
             {offer.creatorUsername}
           </span>
@@ -202,5 +209,8 @@ export const OfferDetailPage = () => {
         onCancel={() => setIsDeleteDialogOpen(false)}
       />
     </div>
-  );
+    );
+  }
+
+  return content;
 };

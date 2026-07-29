@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
-import { Search } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import { Search, X } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 import { offerService } from "../../services/offerService";
 import { CategoryFilter } from "../../components/common/offers/CategoryFilter/CategoryFilter";
 import { OfferCard } from "../../components/common/offers/OfferCard/OfferCard";
 import "./FeedPage.scss";
 
 export const FeedPage = () => {
+  const location = useLocation();
+  const { user, isAuthenticated } = useAuth();
+  const displayName = user?.username || "";
   const [offers, setOffers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [category, setCategory] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [successMessage, setSuccessMessage] = useState(location.state?.deleteSuccess || null);
+
+  useEffect(() => {
+    if (successMessage) {
+      window.history.replaceState({}, document.title);
+      const timer = setTimeout(() => setSuccessMessage(null), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -48,6 +62,9 @@ export const FeedPage = () => {
     <div className="feed-page">
       <header className="feed-header">
         <h1>Collapp</h1>
+        {isAuthenticated && displayName && (
+          <p className="feed-greeting">Hola, {displayName}</p>
+        )}
         <div className="feed-search">
           <Search size={18} aria-hidden="true" />
           <input
@@ -61,6 +78,19 @@ export const FeedPage = () => {
       </header>
 
       <CategoryFilter value={category} onChange={setCategory} />
+
+      {successMessage && (
+        <div className="feed-success-banner" role="status">
+          <p>Oferta &quot;{successMessage}&quot; eliminada correctamente.</p>
+          <button
+            type="button"
+            onClick={() => setSuccessMessage(null)}
+            aria-label="Cerrar mensaje"
+          >
+            <X size={16} aria-hidden="true" />
+          </button>
+        </div>
+      )}
 
       {isLoading && (
         <p role="status" aria-live="polite" className="feed-status">
