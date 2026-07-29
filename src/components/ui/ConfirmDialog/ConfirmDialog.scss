@@ -1,0 +1,73 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.confirm-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($color-ink, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 200;
+}
+
+.confirm-dialog {
+  background-color: $card-bg;
+  border-radius: $radius-card;
+  padding: 24px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: $shadow-card;
+}
+
+.confirm-dialog-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $text-main;
+  margin-bottom: 8px;
+}
+
+.confirm-dialog-message {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.confirm-dialog-cancel {
+  @include focus-ring;
+
+  flex: 1;
+  background: none;
+  border: 1px solid $border-color;
+  color: $text-main;
+  height: 44px;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+
+  &:hover {
+    background-color: $input-bg;
+  }
+}
+
+.confirm-dialog-confirm {
+  @include focus-ring;
+
+  flex: 1;
+  background-color: $error-color;
+  border: none;
+  color: $color-blanco;
+  height: 44px;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+
+  &:hover {
+    background-color: #9E1F1F;
+  }
+}

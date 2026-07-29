@@ -1,0 +1,68 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(
+      ellipse at top left,
+      rgba($bg-gradient-start, 0.4),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at bottom right,
+      rgba($bg-gradient-end, 0.5),
+      transparent 50%
+    ),
+    $bg-page;
+  background-attachment: fixed;
+  font-family: $font-base;
+  color: $text-main;
+  background-color: $bg-page;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  @include focus-ring;
+}
+
+input,
+select {
+  font-family: inherit;
+  @include focus-ring;
+}
+
+a {
+  @include focus-ring;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

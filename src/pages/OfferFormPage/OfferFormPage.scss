@@ -1,0 +1,148 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.offer-form-page {
+  padding: 24px 16px 40px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.offer-form-status {
+  text-align: center;
+  color: $text-muted;
+  padding: 60px 0;
+}
+
+.offer-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+  }
+}
+.offer-form-card {
+  background-color: $card-bg;
+  border-radius: $radius-card;
+  padding: 24px 20px;
+  box-shadow: $shadow-card;
+}
+
+.offer-form-close {
+  @include focus-ring;
+
+  background: none;
+  color: $text-muted;
+  font-size: $font-size-lg;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: $input-bg;
+    color: $text-main;
+  }
+}
+
+.offer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.offer-form-textarea-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+  }
+
+  textarea {
+    @include focus-ring;
+
+    background-color: $input-bg;
+    border: 1px solid $border-color;
+    border-radius: $radius-input;
+    padding: 12px 14px;
+    font-size: $font-size-sm;
+    font-family: $font-base;
+    color: $text-main;
+    resize: vertical;
+    min-height: 90px;
+
+    &:focus {
+      border-color: $primary-color;
+    }
+
+    &::placeholder {
+      color: $text-placeholder;
+    }
+  }
+}
+
+.offer-form-cancel {
+  @include focus-ring;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background: none;
+  border: 1px solid $error-color;
+  color: $error-color;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+
+  &:hover {
+    background-color: rgba($error-color, 0.08);
+  }
+}
+
+.offer-form-status-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+  }
+}
+
+.offer-form-status-options {
+  display: flex;
+  gap: 8px;
+}
+
+.offer-form-status-option {
+  flex: 1;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: $input-bg;
+  border: 1px solid $border-color;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-muted;
+  cursor: pointer;
+
+  &.active {
+    border-color: $primary-color;
+    background-color: rgba($primary-color, 0.08);
+    color: $primary-color;
+    font-weight: $font-weight-semibold;
+  }
+}

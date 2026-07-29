@@ -1,0 +1,20 @@
+@use '../../../../styles/variables' as *;
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $text-muted;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-open .status-dot { background-color: #2E9E5B; }
+.status-paused .status-dot { background-color: #D9A441; }
+.status-closed .status-dot { background-color: $text-placeholder; }

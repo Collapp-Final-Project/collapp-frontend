@@ -1,0 +1,59 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.admin-offer-card {
+  background: $card-bg;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-left: 8px solid $color-ink;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+    margin: 0 0 4px;
+  }
+
+  &-creator {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    margin: 0 0 8px;
+  }
+
+  &-description {
+    font-size: $font-size-sm;
+    color: $text-main;
+    margin: 0 0 16px;
+  }
+
+  &-delete {
+  @include focus-ring;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-left: auto;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid $error-color;
+  border-radius: $radius-button;
+  background: none;
+  color: $error-color;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+
+  &:hover {
+    background-color: rgba($error-color, 0.08);
+  }
+}
+}

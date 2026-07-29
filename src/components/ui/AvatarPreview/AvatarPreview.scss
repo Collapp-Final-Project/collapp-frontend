@@ -1,0 +1,27 @@
+@use '../../../styles/variables' as *;
+
+.avatar-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-preview-image,
+.avatar-preview-placeholder {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+}
+
+.avatar-preview-image {
+  object-fit: cover;
+  border: 2px solid $border-color;
+}
+
+.avatar-preview-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $input-bg;
+  border: 2px dashed $border-color;
+  color: $text-placeholder;
+}

@@ -1,0 +1,97 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.applicant-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: $radius-card;
+  background: $card-bg;
+  box-shadow: $shadow-card;
+  margin-bottom: 12px;
+
+  &-info {
+    flex: 1;
+    min-width: 0;
+
+    h3 {
+      margin: 0 0 4px;
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      color: $text-main;
+    }
+  }
+
+  &-specialty {
+    margin: 0 0 8px;
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+
+  &-message {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $text-main;
+  }
+
+  &-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+
+    button {
+      @include focus-ring;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      height: 36px;
+      padding: 0 16px;
+      border-radius: $radius-button;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+
+      &:first-child {
+        background: rgba($success-color, 0.1);
+        border: 1px solid $success-color;
+        color: $success-color;
+
+        &:hover {
+          background-color: rgba($success-color, 0.15);
+        }
+      }
+
+      &:last-child {
+        background: none;
+        border: 1px solid $error-color;
+        color: $error-color;
+
+        &:hover {
+          background-color: rgba($error-color, 0.08);
+        }
+      }
+    }
+  }
+
+  &-status {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: $radius-button;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+
+    &--accepted {
+      background: rgba($success-color, 0.1);
+      color: $success-color;
+    }
+
+    &--rejected {
+      background: rgba($error-color, 0.1);
+      color: $error-color;
+    }
+  }
+}

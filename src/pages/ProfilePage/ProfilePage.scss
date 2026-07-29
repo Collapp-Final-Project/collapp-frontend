@@ -1,0 +1,211 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.profile-page {
+  padding: 0 16px 100px;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  padding-top: 24px;
+}
+
+.profile-page-header {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.profile-page-header h1 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: $text-main;
+  margin-bottom: 4px;
+}
+
+.profile-page-subtitle {
+  color: $text-muted;
+  font-size: $font-size-sm;
+}
+
+.profile-page-status,
+.profile-page-error {
+  text-align: center;
+  color: $text-muted;
+  padding: 60px 0;
+}
+
+.profile-page-error {
+  color: $error-color;
+}
+
+.profile-page-card {
+  width: 100%;
+  background: $card-bg;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: 0 24px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow: hidden;
+
+  h1 {
+    margin: 12px 0 8px;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+  }
+}
+
+.profile-page-cover {
+  width: calc(100% + 48px);
+  margin: 0 -24px;
+  height: 90px;
+  background: linear-gradient(135deg, $bg-gradient-start, $bg-gradient-end);
+}
+
+.profile-page-avatar-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -40px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  border: 4px solid $card-bg;
+  overflow: hidden;
+  box-shadow: $shadow-card;
+}
+
+.profile-page-bio {
+  margin: 16px 0 0;
+  font-size: $font-size-sm;
+  color: $text-main;
+  line-height: 1.6;
+  width: 100%;
+}
+
+.profile-page-bio-placeholder {
+  color: $text-placeholder;
+}
+
+.profile-page-bio-edit-button {
+  @include focus-ring;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 0 22px;
+  height: 32px;
+  background-color: $color-ink;
+  color: white;
+  border: none;
+  border-radius: $radius-button;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.profile-page-bio-edit {
+  width: 100%;
+  margin-top: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-page-bio-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+
+  button {
+    @include focus-ring;
+
+    flex: 1;
+    height: 40px;
+    border-radius: $radius-button;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+
+    &:first-child {
+      background: none;
+      border: 1px solid $error-color;
+      color: $error-color;
+
+      &:hover {
+        background-color: rgba($error-color, 0.08);
+      }
+    }
+
+    &:last-child {
+      background: $primary-color;
+      border: none;
+      color: white;
+
+      &:hover {
+        background: $primary-hover;
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.profile-page-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.profile-page-link {
+  @include focus-ring;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: $primary-color;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+  text-decoration: none;
+}
+
+.profile-page-logout {
+  @include focus-ring;
+
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid $error-color;
+  color: $error-color;
+  border-radius: $radius-button;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-sm;
+
+  &:hover {
+    background-color: rgba($error-color, 0.08);
+  }
+}

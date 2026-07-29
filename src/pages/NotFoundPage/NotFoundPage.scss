@@ -1,0 +1,46 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.not-found-page {
+  @include flex-center-container;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  padding: 24px;
+
+  h1 {
+    font-size: 5rem;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+    margin: 0;
+  }
+
+  p {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $text-main;
+    margin: 0;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin-bottom: 16px;
+  }
+
+  button {
+    @include focus-ring;
+
+    background-color: $primary-color;
+    color: $color-blanco;
+    height: 48px;
+    padding: 0 32px;
+    border-radius: $radius-button;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+  }
+}

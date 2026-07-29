@@ -1,0 +1,54 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.my-publications-page {
+  padding: 24px 16px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-main;
+    margin-bottom: 4px;
+  }
+}
+
+.my-publications-subtitle {
+  color: $text-muted;
+  font-size: $font-size-sm;
+  margin-bottom: 20px;
+}
+
+.my-publications-status,
+.my-publications-empty {
+  text-align: center;
+  color: $text-muted;
+  padding: 60px 0;
+}
+
+.my-publications-error {
+  color: $error-color;
+  margin-bottom: 16px;
+}
+
+.my-publications-create {
+  @include focus-ring;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, $bg-gradient-start, $bg-gradient-end);
+  border-radius: $radius-card;
+  padding: 24px 22px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: $color-ink;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+  box-shadow: $shadow-card;
+}
+
+.my-publications-create-icon {
+  margin-right: 8px;
+}

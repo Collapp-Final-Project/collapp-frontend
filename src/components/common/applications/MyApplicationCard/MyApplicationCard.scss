@@ -1,0 +1,124 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.my-application-card {
+  background: $card-bg;
+  border-radius: $radius-card;
+  box-shadow: $shadow-card;
+  padding: 16px;
+  margin-bottom: 16px;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 4px;
+
+    h2 {
+      margin: 0;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $text-main;
+    }
+  }
+
+ &-meta {
+  margin: 0 0 2px;
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+&-date {
+  margin: 0 0 12px;
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+  &-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+    flex-shrink: 0;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    &--blue {
+      color: $color-azul-real;
+      .dot { background-color: $color-azul-real; }
+    }
+
+    &--green {
+      color: $success-color;
+      .dot { background-color: $success-color; }
+    }
+
+    &--red {
+      color: $error-color;
+      .dot { background-color: $error-color; }
+    }
+  }
+
+  &-contact {
+    background: $bg-page;
+    border-radius: $radius-input;
+    padding: 12px;
+    margin-bottom: 12px;
+
+    p {
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $text-main;
+      font-weight: $font-weight-semibold;
+      margin-bottom: 6px;
+    }
+
+    a {
+      @include focus-ring;
+
+      display: block;
+      margin: 0;
+      font-size: $font-size-sm;
+      color: $primary-color;
+      text-decoration: none;
+      word-break: break-all;
+
+      &:not(:last-child) {
+        margin-bottom: 4px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &-link {
+    @include focus-ring;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: $color-ink;
+    color: $color-blanco;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: $radius-button;
+    white-space: nowrap;
+  }
+}
