@@ -14,10 +14,18 @@
   margin-bottom: 20px;
 
   h1 {
+    font-family: $font-logo;
+    letter-spacing: -0.04em;
     font-size: $font-size-2xl;
     font-weight: $font-weight-bold;
     color: $text-main;
   }
+}
+
+.feed-greeting {
+  font-size: $font-size-md;
+  color: $text-muted;
+  margin: 0;
 }
 
 .feed-search {

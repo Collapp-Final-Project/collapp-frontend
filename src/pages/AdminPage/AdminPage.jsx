@@ -8,7 +8,8 @@ import { ConfirmDialog } from "../../components/ui/ConfirmDialog/ConfirmDialog";
 import "./AdminPage.scss";
 
 export const AdminPage = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+  const displayName = user?.username || "";
   const [offers, setOffers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -66,6 +67,7 @@ export const AdminPage = () => {
 
       <div className="admin-page-content">
         <h1>Publicaciones</h1>
+        {displayName && <p className="admin-greeting">Hola, {displayName}</p>}
         <p className="admin-page-subtitle">Revisión de ofertas.</p>
 
         {successMessage && (

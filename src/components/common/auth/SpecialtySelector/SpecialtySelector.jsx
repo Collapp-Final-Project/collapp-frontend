@@ -1,7 +1,7 @@
 import "./SpecialtySelector.scss";
 
 const SPECIALTIES = [
-  { value: "MAKEUP", label: "SFX & Maquillaje", className: "specialty-sfx" },
+  { value: "MAKEUP", label: "Maquillaje", className: "specialty-sfx" },
   { value: "PHOTOGRAPHY_VIDEO", label: "Fotografía & Video", className: "specialty-photo" },
   { value: "MODEL_TALENT", label: "Modelo / Talento", className: "specialty-model" },
   { value: "PRODUCTION", label: "Producción", className: "specialty-prod" },

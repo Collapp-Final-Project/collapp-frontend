@@ -14,7 +14,7 @@ export const CATEGORIES = [
   { value: null, label: "Todos" },
   { value: "PHOTOGRAPHY_VIDEO", label: "Foto/Vídeo" },
   { value: "PRODUCTION", label: "Producción" },
-  { value: "MAKEUP", label: "Makeup" },
+  { value: "MAKEUP", label: "Maquillaje" },
   { value: "MODEL_TALENT", label: "Modelo/Talento" },
 ];
 
